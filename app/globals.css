@@ -124,3 +124,7 @@
 html, body {
   background: var(--background);
 }
+
+a:hover {
+  text-decoration: underline;
+}
