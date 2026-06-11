@@ -11,13 +11,15 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const post = getPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
   if (!post) return {};
   return { title: `${post.frontmatter.title} — HCI Design Lab` };
 }
 
-export default function PostPage({ params }) {
-  const post = getPostBySlug(params.slug);
+export default async function PostPage({ params }) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
   if (!post) notFound();
 
   const { frontmatter: fm, content } = post;
