@@ -1,0 +1,503 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+  .hci-wrap {
+    background: #F5F2EB;
+    color: #1A1917;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up {
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  .hci-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 36px;
+    border-bottom: 0.5px solid rgba(26,25,23,0.15);
+  }
+  .hci-logo {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #1A1917;
+    text-decoration: none;
+  }
+  .hci-nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .hci-nav-links a {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #5C5A56;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .hci-nav-links a:hover { color: #C4521A; }
+
+  .hci-hero {
+    padding: 64px 36px 56px;
+    border-bottom: 0.5px solid rgba(26,25,23,0.15);
+  }
+  .hci-eyebrow {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #C4521A;
+    margin-bottom: 20px;
+    animation: fadeUp 0.6s ease 0.1s forwards;
+    opacity: 0;
+  }
+  .hci-hero-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 68px;
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: #1A1917;
+    margin: 0 0 8px;
+    animation: fadeUp 0.7s ease 0.25s forwards;
+    opacity: 0;
+  }
+  .hci-hero-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: #3D3B37;
+  }
+  .hci-hero-dot { color: #C4521A; }
+
+  .hci-hero-sub {
+    font-size: 16px;
+    font-weight: 300;
+    color: #5C5A56;
+    margin: 20px 0 36px;
+    max-width: 420px;
+    line-height: 1.65;
+    animation: fadeUp 0.7s ease 0.4s forwards;
+    opacity: 0;
+  }
+  .hci-hero-cta {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #1A1917;
+    text-decoration: none;
+    border-bottom: 1px solid #C4521A;
+    padding-bottom: 2px;
+    animation: fadeUp 0.7s ease 0.52s forwards;
+    opacity: 0;
+  }
+
+  .hci-section {
+    padding: 52px 36px;
+    border-bottom: 0.5px solid rgba(26,25,23,0.15);
+  }
+  .hci-section-label {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #9B9891;
+    margin-bottom: 36px;
+  }
+
+  .hci-services {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .hci-service {
+    padding: 24px 24px 24px 0;
+    border-top: 0.5px solid rgba(26,25,23,0.15);
+  }
+  .hci-service:nth-child(2n) {
+    padding-left: 24px;
+    padding-right: 0;
+    border-left: 0.5px solid rgba(26,25,23,0.15);
+  }
+  .hci-service-num {
+    font-size: 11px;
+    color: #C4521A;
+    font-weight: 400;
+    margin-bottom: 12px;
+    letter-spacing: 0.08em;
+  }
+  .hci-service-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #1A1917;
+    margin: 0 0 10px;
+    line-height: 1.25;
+  }
+  .hci-service-body {
+    font-size: 13px;
+    color: #5C5A56;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .hci-about {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .hci-about-label {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 36px;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.1;
+    color: #1A1917;
+  }
+  .hci-about-body {
+    font-size: 14px;
+    color: #3D3B37;
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  .hci-notes-section {
+    padding: 52px 36px;
+    border-bottom: 0.5px solid rgba(26,25,23,0.15);
+  }
+  .hci-notes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+  }
+  .hci-notes-tagline {
+    font-size: 12px;
+    color: #9B9891;
+    font-style: italic;
+    margin-bottom: 32px;
+  }
+  .hci-see-all {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #5C5A56;
+    text-decoration: none;
+    border-bottom: 0.5px solid rgba(196,82,26,0.4);
+    padding-bottom: 1px;
+  }
+  .hci-blog-post {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 24px;
+    padding: 22px 0;
+    border-top: 0.5px solid rgba(26,25,23,0.15);
+    align-items: start;
+    cursor: pointer;
+  }
+  .hci-blog-post:hover .hci-blog-title { color: #C4521A; }
+  .hci-blog-meta {
+    font-size: 11px;
+    color: #9B9891;
+    letter-spacing: 0.06em;
+    line-height: 1.6;
+    padding-top: 3px;
+  }
+  .hci-blog-issue {
+    font-size: 11px;
+    color: #C4521A;
+    letter-spacing: 0.08em;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .hci-blog-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: #1A1917;
+    margin: 0 0 7px;
+    line-height: 1.3;
+    transition: color 0.15s;
+  }
+  .hci-blog-pull {
+    font-size: 13px;
+    color: #5C5A56;
+    margin: 0;
+    line-height: 1.55;
+    font-style: italic;
+  }
+
+  .hci-work-section {
+    padding: 52px 36px;
+    border-bottom: 0.5px solid rgba(26,25,23,0.15);
+  }
+  .hci-work-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 28px;
+  }
+  .hci-work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .hci-work-card {
+    border-radius: 6px;
+    overflow: hidden;
+    border: 0.5px solid rgba(26,25,23,0.12);
+    background: #EFECE4;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .hci-work-card:hover { border-color: rgba(196,82,26,0.4); }
+  .hci-work-card:hover .hci-work-card-title { color: #C4521A; }
+  .hci-work-thumb {
+    height: 110px;
+    background: #1A1917;
+    position: relative;
+    overflow: hidden;
+  }
+  .hci-work-thumb-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.07;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(245,242,235,0.8) 20px, rgba(245,242,235,0.8) 21px),
+      repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(245,242,235,0.8) 20px, rgba(245,242,235,0.8) 21px);
+  }
+  .hci-work-thumb-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,9,8,0.65) 0%, transparent 70%);
+  }
+  .hci-work-thumb-type {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,242,235,0.55);
+    border: 0.5px solid rgba(245,242,235,0.18);
+    padding: 2px 7px;
+    border-radius: 2px;
+  }
+  .hci-work-body { padding: 14px 16px 16px; }
+  .hci-work-card-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: #1A1917;
+    margin: 0 0 8px;
+    line-height: 1.3;
+    transition: color 0.15s;
+  }
+  .hci-work-card-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+  .hci-work-tag {
+    font-size: 10px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #7A3A12;
+    background: rgba(196,82,26,0.1);
+    padding: 2px 7px;
+    border-radius: 2px;
+  }
+
+  .hci-footer {
+    padding: 28px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .hci-footer-copy { font-size: 12px; color: #9B9891; }
+  .hci-footer-email {
+    font-size: 12px;
+    color: #5C5A56;
+    text-decoration: none;
+    border-bottom: 0.5px solid rgba(196,82,26,0.4);
+    padding-bottom: 1px;
+  }
+
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<div class="hci-wrap" id="hci-root">
+
+  <nav class="hci-nav">
+    <a class="hci-logo" href="#">HCI Design Lab</a>
+    <ul class="hci-nav-links">
+      <li><a href="#">Work</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Lab Notes</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hci-hero">
+    <p class="hci-eyebrow">Human AI Creative Studio — Reno, NV</p>
+    <h1 class="hci-hero-title">
+      Human<span class="hci-hero-dot">.</span><br>
+      <em>AI Experience</em><br>
+      Design<span class="hci-hero-dot">.</span>
+    </h1>
+    <p class="hci-hero-sub">We design systems where artificial intelligence supports, augments, and adapts to human needs — creating intuitive, inclusive, and empowering interactions.</p>
+    <a class="hci-hero-cta" href="#">View our services</a>
+  </section>
+
+  <section class="hci-section scroll-reveal">
+    <p class="hci-section-label">What we do</p>
+    <div class="hci-services">
+      <div class="hci-service">
+        <p class="hci-service-num">01</p>
+        <h3 class="hci-service-title">Fast AI Prototyping</h3>
+        <p class="hci-service-body">Rapidly turn concepts into working prototypes. Test ideas with real users before investing in full-scale development.</p>
+      </div>
+      <div class="hci-service">
+        <p class="hci-service-num">02</p>
+        <h3 class="hci-service-title">Human-Centered AI Design</h3>
+        <p class="hci-service-body">Interfaces that prioritize usability, trust, and inclusivity — AI tools that feel intuitive and supportive of real people's needs.</p>
+      </div>
+      <div class="hci-service" style="border-bottom:none;padding-bottom:0;">
+        <p class="hci-service-num">03</p>
+        <h3 class="hci-service-title">Custom AI Solutions</h3>
+        <p class="hci-service-body">Tailored AI-driven tools, dashboards, and workflows that integrate seamlessly into your existing systems.</p>
+      </div>
+      <div class="hci-service" style="border-bottom:none;padding-bottom:0;">
+        <p class="hci-service-num">04</p>
+        <h3 class="hci-service-title">AI Training + Enablement</h3>
+        <p class="hci-service-body">Workshops and hands-on guidance that demystify AI and empower your organization to lead confidently.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="hci-work-section scroll-reveal">
+    <div class="hci-work-header">
+      <p class="hci-section-label" style="margin-bottom:0;">Selected work</p>
+      <a class="hci-see-all" href="#">See all projects</a>
+    </div>
+    <div class="hci-work-grid">
+      <div class="hci-work-card">
+        <div class="hci-work-thumb">
+          <div class="hci-work-thumb-pattern"></div>
+          <div class="hci-work-thumb-overlay"></div>
+          <span class="hci-work-thumb-type">AI Tool</span>
+        </div>
+        <div class="hci-work-body">
+          <h3 class="hci-work-card-title">a11y Logger</h3>
+          <div class="hci-work-card-tags">
+            <span class="hci-work-tag">AI</span>
+            <span class="hci-work-tag">Accessibility</span>
+            <span class="hci-work-tag">Full Stack</span>
+          </div>
+        </div>
+      </div>
+      <div class="hci-work-card">
+        <div class="hci-work-thumb">
+          <div class="hci-work-thumb-pattern"></div>
+          <div class="hci-work-thumb-overlay"></div>
+          <span class="hci-work-thumb-type">UX Research</span>
+        </div>
+        <div class="hci-work-body">
+          <h3 class="hci-work-card-title">Conversational AI Onboarding Study</h3>
+          <div class="hci-work-card-tags">
+            <span class="hci-work-tag">AI</span>
+            <span class="hci-work-tag">UX Research</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hci-section scroll-reveal">
+    <div class="hci-about">
+      <div class="hci-about-label">What is<br>HCI?</div>
+      <p class="hci-about-body">Human-Computer Interaction is the study of how people engage with technology. At HCI Design Lab, we extend this to Human-AI experiences — designing systems where artificial intelligence supports, augments, and adapts to human needs, creating interactions that are intuitive, inclusive, and genuinely empowering.</p>
+    </div>
+  </section>
+
+  <section class="hci-notes-section scroll-reveal">
+    <div class="hci-notes-header">
+      <p class="hci-section-label" style="margin-bottom:0;">Lab Notes</p>
+      <a class="hci-see-all" href="#">See all</a>
+    </div>
+    <p class="hci-notes-tagline">Observations, opinions, and dispatches from the work.</p>
+
+    <div class="hci-blog-post">
+      <div class="hci-blog-meta">
+        <span class="hci-blog-issue">No. 001</span>
+        Jun 2026
+      </div>
+      <div>
+        <h3 class="hci-blog-title">Designing AI that sees what humans miss: the a11y Logger</h3>
+        <p class="hci-blog-pull">What happens when you give accessibility testers an AI system and then actually study whether it works?</p>
+      </div>
+    </div>
+    <div class="hci-blog-post">
+      <div class="hci-blog-meta">
+        <span class="hci-blog-issue">No. 002</span>
+        May 2026
+      </div>
+      <div>
+        <h3 class="hci-blog-title">The interface is the argument: why AI design is always a position</h3>
+        <p class="hci-blog-pull">Every design decision in an AI product is a claim about what matters — and most teams never acknowledge they're making one.</p>
+      </div>
+    </div>
+    <div class="hci-blog-post">
+      <div class="hci-blog-meta">
+        <span class="hci-blog-issue">No. 003</span>
+        Apr 2026
+      </div>
+      <div>
+        <h3 class="hci-blog-title">Trust debt: how AI products borrow from users and rarely pay back</h3>
+        <p class="hci-blog-pull">We are building on borrowed confidence. The question isn't whether users trust AI — it's whether the systems deserve it.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="hci-footer scroll-reveal">
+    <span class="hci-footer-copy">© HCI Design Lab 2026 — Reno, NV</span>
+    <a class="hci-footer-email" href="mailto:hello@hcidesignlab.com">hello@hcidesignlab.com</a>
+  </footer>
+
+</div>
+
+<script>
+  const reveals = document.querySelectorAll('.scroll-reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>

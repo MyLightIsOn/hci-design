@@ -1,0 +1,426 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap');
+
+  .post-wrap {
+    background: #F5F2EB;
+    color: #1A1917;
+    font-family: 'DM Sans', sans-serif;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .post-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 36px;
+    border-bottom: 0.5px solid rgba(26,25,23,0.15);
+  }
+  .post-nav-logo {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #1A1917;
+    text-decoration: none;
+  }
+  .post-nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .post-nav-links a {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #5C5A56;
+    text-decoration: none;
+  }
+  .post-nav-links a:hover { color: #C4521A; }
+  .post-nav-links a.active { color: #C4521A; }
+
+  .post-header {
+    padding: 56px 36px 48px;
+    border-bottom: 0.5px solid rgba(26,25,23,0.15);
+    max-width: 680px;
+  }
+  .post-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .post-breadcrumb a {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #C4521A;
+    text-decoration: none;
+  }
+  .post-breadcrumb-sep {
+    font-size: 11px;
+    color: #9B9891;
+  }
+  .post-breadcrumb-current {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #9B9891;
+  }
+  .post-issue {
+    font-size: 11px;
+    color: #C4521A;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .post-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: #1A1917;
+    margin: 0 0 20px;
+  }
+  .post-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 24px;
+  }
+  .post-meta-item {
+    font-size: 12px;
+    color: #9B9891;
+    letter-spacing: 0.04em;
+  }
+  .post-meta-sep { color: rgba(26,25,23,0.2); }
+  .post-tag {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #7A3A12;
+    background: rgba(196,82,26,0.1);
+    padding: 3px 10px;
+    border-radius: 2px;
+  }
+
+  .post-body {
+    padding: 0 36px;
+    max-width: 680px;
+  }
+
+  .post-lede {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.55;
+    color: #3D3B37;
+    padding: 36px 0 32px;
+    border-bottom: 0.5px solid rgba(26,25,23,0.15);
+    margin: 0;
+  }
+
+  .post-section { padding: 32px 0 0; }
+
+  .post-section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #C4521A;
+    margin: 0 0 14px;
+  }
+
+  .post-h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1A1917;
+    margin: 0 0 14px;
+    line-height: 1.2;
+  }
+
+  .post-p {
+    font-size: 15px;
+    color: #3D3B37;
+    line-height: 1.8;
+    margin: 0 0 18px;
+  }
+
+  .post-pullquote {
+    border-left: 2px solid #C4521A;
+    margin: 28px 0;
+    padding: 4px 0 4px 24px;
+  }
+  .post-pullquote p {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 400;
+    color: #1A1917;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .post-findings {
+    background: rgba(26,25,23,0.04);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 24px 0;
+  }
+  .post-findings-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #9B9891;
+    margin: 0 0 16px;
+  }
+  .post-finding {
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+    padding: 10px 0;
+    border-top: 0.5px solid rgba(26,25,23,0.1);
+  }
+  .post-finding:first-of-type { border-top: none; padding-top: 0; }
+  .post-finding-stat {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #C4521A;
+    min-width: 56px;
+    line-height: 1;
+  }
+  .post-finding-text {
+    font-size: 13px;
+    color: #3D3B37;
+    line-height: 1.5;
+  }
+
+  .post-divider {
+    height: 0.5px;
+    background: rgba(26,25,23,0.12);
+    margin: 32px 0;
+  }
+
+  .post-caption {
+    font-size: 12px;
+    color: #9B9891;
+    font-style: italic;
+    margin: -10px 0 24px;
+    line-height: 1.5;
+  }
+
+  .post-figure {
+    background: rgba(26,25,23,0.04);
+    border-radius: 8px;
+    padding: 28px;
+    margin: 24px 0 8px;
+    font-size: 13px;
+    color: #5C5A56;
+    line-height: 1.6;
+  }
+
+  .post-agent-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 8px 0;
+    flex-wrap: wrap;
+  }
+  .post-agent {
+    background: #1A1917;
+    color: #F5F2EB;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    padding: 6px 14px;
+    border-radius: 3px;
+  }
+  .post-agent-arrow {
+    color: #C4521A;
+    font-size: 14px;
+    padding: 0 8px;
+  }
+
+  .post-footer-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    border-top: 0.5px solid rgba(26,25,23,0.15);
+    margin-top: 48px;
+    background: rgba(26,25,23,0.15);
+  }
+  .post-footer-nav-item {
+    background: #F5F2EB;
+    padding: 28px 36px;
+    text-decoration: none;
+    display: block;
+  }
+  .post-footer-nav-item:hover .post-footer-nav-title { color: #C4521A; }
+  .post-footer-nav-dir {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #9B9891;
+    margin-bottom: 8px;
+  }
+  .post-footer-nav-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: #1A1917;
+    line-height: 1.3;
+    transition: color 0.15s;
+  }
+  .post-footer-nav-item.next { text-align: right; }
+
+  .post-back-footer {
+    padding: 24px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 0.5px solid rgba(26,25,23,0.15);
+  }
+  .post-back-link {
+    font-size: 12px;
+    color: #9B9891;
+    text-decoration: none;
+  }
+  .post-back-link:hover { color: #C4521A; }
+  .post-footer-copy { font-size: 12px; color: #9B9891; }
+</style>
+
+<div class="post-wrap">
+
+  <nav class="post-nav">
+    <a class="post-nav-logo" href="#">HCI Design Lab</a>
+    <ul class="post-nav-links">
+      <li><a href="#">Services</a></li>
+      <li><a href="#" class="active">Lab Notes</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="post-header">
+    <div class="post-breadcrumb">
+      <a href="#">Lab Notes</a>
+      <span class="post-breadcrumb-sep">/</span>
+      <span class="post-breadcrumb-current">No. 001</span>
+    </div>
+    <p class="post-issue">No. 001 — June 2026</p>
+    <h1 class="post-title">Designing AI that sees what humans miss: the a11y Logger</h1>
+    <div class="post-meta-row">
+      <span class="post-meta-item">Lawrence Moore</span>
+      <span class="post-meta-sep">·</span>
+      <span class="post-meta-item">Case Study</span>
+      <span class="post-meta-sep">·</span>
+      <span class="post-meta-item">12 min read</span>
+      <span class="post-meta-sep">·</span>
+      <span class="post-tag">Accessibility</span>
+    </div>
+  </header>
+
+  <div class="post-body">
+
+    <p class="post-lede">Accessibility issues are invisibly logged manually. What happens when you give teams an AI system that detects, categorizes, and summarizes them automatically — and then study whether it actually works?</p>
+
+    <div class="post-section">
+      <p class="post-section-label">Background</p>
+      <h2 class="post-h2">The problem with manual accessibility logging</h2>
+      <p class="post-p">During my time as product manager at an agency, I consistently ran into the friction of accessibility. The work itself wasn't difficult — but the logging was. Testers would flag the same issues repeatedly across products, creating redundant reports that were hard to triage, harder to act on, and nearly impossible to share meaningfully across teams.</p>
+      <p class="post-p">Accessibility reports tend to accumulate for non-technical stakeholders. They often require extra interpretation to be actionable. The real cost isn't finding issues — it's communicating them in a way that drives remediation.</p>
+
+      <div class="post-pullquote">
+        <p>"It's best thinking to say that the best way to prevent that lazy teapot: I've been using manually scanning by downloading a little bit more delicate." — a real tester note that inspired this project.</p>
+      </div>
+    </div>
+
+    <div class="post-divider"></div>
+
+    <div class="post-section">
+      <p class="post-section-label">System Design</p>
+      <h2 class="post-h2">A multi-agent workflow, not a single model</h2>
+      <p class="post-p">The core insight was that accessibility logging isn't one problem — it's three sequential ones: detection, enrichment, and communication. Building a single model to do all three collapses distinctions that matter. Instead, the system uses a pipeline of specialized agents.</p>
+
+      <div class="post-figure">
+        <div class="post-agent-row">
+          <span class="post-agent">Issue Detection</span>
+          <span class="post-agent-arrow">→</span>
+          <span class="post-agent">LLM Enrichment</span>
+          <span class="post-agent-arrow">→</span>
+          <span class="post-agent">Aggregation</span>
+          <span class="post-agent-arrow">→</span>
+          <span class="post-agent">Report</span>
+        </div>
+      </div>
+      <p class="post-caption">The four-stage pipeline. Each agent hands off structured output to the next.</p>
+
+      <p class="post-p">Three agents handle the core work. Issue Refinement expands titles and descriptions, suggests task-level fixes, and flags issues for technical and non-technical audiences. Report Generation produces an executive summary with a separate analytics summary. A Reduce/Merge agent consolidates duplicate issues across test runs — the hardest part of any multi-session accessibility audit.</p>
+    </div>
+
+    <div class="post-divider"></div>
+
+    <div class="post-section">
+      <p class="post-section-label">Usability Study</p>
+      <h2 class="post-h2">Does it actually work? What 20 participants told us</h2>
+      <p class="post-p">Rather than ship and hope, I ran a moderated usability study with 20 participants split across two cohorts: accessibility professionals with 10+ years of experience, and developers currently working on accessibility projects. Each group logged the same issues in both the AI system and their current manual workflow.</p>
+
+      <div class="post-findings">
+        <p class="post-findings-label">Key findings</p>
+        <div class="post-finding">
+          <span class="post-finding-stat">84%</span>
+          <span class="post-finding-text">of participants rated AI-generated issue descriptions as accurate or better than their own manual notes</span>
+        </div>
+        <div class="post-finding">
+          <span class="post-finding-stat">−24%</span>
+          <span class="post-finding-text">median reduction in time to log a difficulty-tier issue compared to manual baseline</span>
+        </div>
+        <div class="post-finding">
+          <span class="post-finding-stat">+5%</span>
+          <span class="post-finding-text">accuracy improvement on AI-assisted issue descriptions versus manual logging alone</span>
+        </div>
+      </div>
+
+      <p class="post-p">The most important insight from participants: Ali Loper's value is prioritization. It adds no time to the workflow — it meaningfully reduces it — while simultaneously improving the quality and completeness of what gets logged. Within-session summaries helped participants orient faster and context-switch more cleanly between test scenarios.</p>
+    </div>
+
+    <div class="post-divider"></div>
+
+    <div class="post-section" style="padding-bottom: 48px;">
+      <p class="post-section-label">Conclusion</p>
+      <h2 class="post-h2">What this means for AI-assisted design tooling</h2>
+      <p class="post-p">The a11y Logger is lean and opinionated. It doesn't try to replace expert judgment — it tries to remove the tax on it. The most important design decision wasn't a UI choice or a model choice. It was the decision to keep humans in the loop at every critical handoff, and to optimize for the moment a tester hands a report to someone who wasn't in the room.</p>
+
+      <div class="post-pullquote">
+        <p>The best accessibility tools don't make experts faster. They make their expertise legible to everyone else in the room.</p>
+      </div>
+
+      <p class="post-p">The system is now being used across test campaigns. Next: exploring real-time detection during live user sessions, and expanding the reduce/merge logic to handle cross-product issue deduplication at scale.</p>
+    </div>
+
+  </div>
+
+  <div class="post-footer-nav">
+    <a class="post-footer-nav-item" href="#">
+      <p class="post-footer-nav-dir">← Previous</p>
+      <p class="post-footer-nav-title">Trust debt: how AI products borrow from users and rarely pay back</p>
+    </a>
+    <a class="post-footer-nav-item next" href="#">
+      <p class="post-footer-nav-dir">Next →</p>
+      <p class="post-footer-nav-title">Prototyping at the speed of thought: what fast AI iteration actually costs</p>
+    </a>
+  </div>
+
+  <footer class="post-back-footer">
+    <a class="post-back-link" href="#">← Back to Lab Notes</a>
+    <span class="post-footer-copy">© HCI Design Lab 2026</span>
+  </footer>
+
+</div>

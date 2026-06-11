@@ -230,7 +230,6 @@
   border-top: 0.5px solid var(--border);
   align-items: start;
   cursor: pointer;
-  display: grid;
 }
 .blogPost:hover .blogTitle { color: var(--accent); }
 .blogMeta {

@@ -1,0 +1,409 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+  .idx-wrap {
+    background: #F5F2EB;
+    color: #1A1917;
+    font-family: 'DM Sans', sans-serif;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .idx-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 36px;
+    border-bottom: 0.5px solid rgba(26,25,23,0.15);
+  }
+  .idx-nav-logo {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #1A1917;
+    text-decoration: none;
+  }
+  .idx-nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .idx-nav-links a {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #5C5A56;
+    text-decoration: none;
+  }
+  .idx-nav-links a:hover { color: #C4521A; }
+  .idx-nav-links a.active { color: #C4521A; }
+
+  .idx-header {
+    padding: 56px 36px 44px;
+    border-bottom: 0.5px solid rgba(26,25,23,0.15);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: end;
+  }
+  .idx-header-left {}
+  .idx-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #C4521A;
+    margin-bottom: 16px;
+  }
+  .idx-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: #1A1917;
+    margin: 0;
+  }
+  .idx-title-dot { color: #C4521A; }
+  .idx-header-right {
+    padding-bottom: 6px;
+  }
+  .idx-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: #5C5A56;
+    line-height: 1.7;
+    margin: 0 0 20px;
+  }
+  .idx-count {
+    font-size: 12px;
+    color: #9B9891;
+    letter-spacing: 0.06em;
+  }
+  .idx-count span {
+    color: #C4521A;
+    font-weight: 500;
+  }
+
+  .idx-filter-bar {
+    padding: 16px 36px;
+    border-bottom: 0.5px solid rgba(26,25,23,0.15);
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .idx-filter-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9B9891;
+    margin-right: 8px;
+  }
+  .idx-filter-btn {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #5C5A56;
+    background: none;
+    border: 0.5px solid rgba(26,25,23,0.2);
+    border-radius: 2px;
+    padding: 5px 12px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.15s;
+  }
+  .idx-filter-btn:hover { border-color: #C4521A; color: #C4521A; }
+  .idx-filter-btn.active {
+    background: #1A1917;
+    color: #F5F2EB;
+    border-color: #1A1917;
+  }
+
+  .idx-list { padding: 0 36px; }
+
+  .idx-post {
+    display: grid;
+    grid-template-columns: 96px 1fr 180px;
+    gap: 28px;
+    padding: 28px 0;
+    border-bottom: 0.5px solid rgba(26,25,23,0.12);
+    align-items: start;
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .idx-post:hover .idx-post-title { color: #C4521A; }
+
+  .idx-post-meta {
+    padding-top: 4px;
+  }
+  .idx-post-issue {
+    font-size: 11px;
+    color: #C4521A;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .idx-post-date {
+    font-size: 12px;
+    color: #9B9891;
+    display: block;
+    line-height: 1.5;
+  }
+
+  .idx-post-center {}
+  .idx-post-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 19px;
+    font-weight: 400;
+    color: #1A1917;
+    margin: 0 0 9px;
+    line-height: 1.25;
+    transition: color 0.15s;
+  }
+  .idx-post-pull {
+    font-size: 13px;
+    color: #5C5A56;
+    font-style: italic;
+    line-height: 1.55;
+    margin: 0 0 12px;
+  }
+  .idx-post-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .idx-tag {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #7A3A12;
+    background: rgba(196,82,26,0.1);
+    padding: 3px 9px;
+    border-radius: 2px;
+  }
+
+  .idx-post-right {
+    padding-top: 4px;
+    text-align: right;
+  }
+  .idx-post-readtime {
+    font-size: 12px;
+    color: #9B9891;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .idx-read-link {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #1A1917;
+    text-decoration: none;
+    border-bottom: 1px solid #C4521A;
+    padding-bottom: 2px;
+    transition: color 0.15s;
+  }
+  .idx-read-link:hover { color: #C4521A; }
+
+  .idx-featured {
+    background: rgba(196,82,26,0.05);
+    border-left: 2px solid #C4521A;
+    border-radius: 0;
+    padding-left: 28px;
+    margin-left: -28px;
+  }
+  .idx-featured-badge {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #C4521A;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .idx-footer {
+    padding: 28px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 0.5px solid rgba(26,25,23,0.15);
+    margin-top: 8px;
+  }
+  .idx-footer-copy { font-size: 12px; color: #9B9891; }
+  .idx-footer-email {
+    font-size: 12px;
+    color: #5C5A56;
+    text-decoration: none;
+    border-bottom: 0.5px solid rgba(196,82,26,0.4);
+    padding-bottom: 1px;
+  }
+</style>
+
+<div class="idx-wrap">
+
+  <nav class="idx-nav">
+    <a class="idx-nav-logo" href="#">HCI Design Lab</a>
+    <ul class="idx-nav-links">
+      <li><a href="#">Services</a></li>
+      <li><a href="#" class="active">Lab Notes</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="idx-header">
+    <div class="idx-header-left">
+      <p class="idx-eyebrow">From the lab</p>
+      <h1 class="idx-title">Lab<br>Notes<span class="idx-title-dot">.</span></h1>
+    </div>
+    <div class="idx-header-right">
+      <p class="idx-desc">Observations, opinions, and dispatches from the work. Essays on AI design, human-centered systems, and what we're learning by building.</p>
+      <p class="idx-count"><span>6</span> notes published</p>
+    </div>
+  </header>
+
+  <div class="idx-filter-bar">
+    <span class="idx-filter-label">Filter</span>
+    <button class="idx-filter-btn active">All</button>
+    <button class="idx-filter-btn">Case Studies</button>
+    <button class="idx-filter-btn">Essays</button>
+    <button class="idx-filter-btn">Accessibility</button>
+    <button class="idx-filter-btn">AI Design</button>
+  </div>
+
+  <div class="idx-list">
+
+    <div class="idx-post idx-featured">
+      <div class="idx-post-meta">
+        <span class="idx-featured-badge">Latest</span>
+        <span class="idx-post-issue">No. 001</span>
+        <span class="idx-post-date">Jun 2026</span>
+      </div>
+      <div class="idx-post-center">
+        <h2 class="idx-post-title">Designing AI that sees what humans miss: the a11y Logger</h2>
+        <p class="idx-post-pull">What happens when you give accessibility testers an AI system that detects, categorizes, and summarizes issues automatically — and then actually study whether it works?</p>
+        <div class="idx-post-tags">
+          <span class="idx-tag">Case Study</span>
+          <span class="idx-tag">Accessibility</span>
+          <span class="idx-tag">AI Design</span>
+        </div>
+      </div>
+      <div class="idx-post-right">
+        <span class="idx-post-readtime">12 min read</span>
+        <a class="idx-read-link" href="#">Read →</a>
+      </div>
+    </div>
+
+    <div class="idx-post">
+      <div class="idx-post-meta">
+        <span class="idx-post-issue">No. 002</span>
+        <span class="idx-post-date">May 2026</span>
+      </div>
+      <div class="idx-post-center">
+        <h2 class="idx-post-title">The interface is the argument: why AI design is always a position</h2>
+        <p class="idx-post-pull">Every design decision in an AI product is a claim about what matters — and most teams never acknowledge they're making one.</p>
+        <div class="idx-post-tags">
+          <span class="idx-tag">Essay</span>
+          <span class="idx-tag">AI Design</span>
+        </div>
+      </div>
+      <div class="idx-post-right">
+        <span class="idx-post-readtime">8 min read</span>
+        <a class="idx-read-link" href="#">Read →</a>
+      </div>
+    </div>
+
+    <div class="idx-post">
+      <div class="idx-post-meta">
+        <span class="idx-post-issue">No. 003</span>
+        <span class="idx-post-date">Apr 2026</span>
+      </div>
+      <div class="idx-post-center">
+        <h2 class="idx-post-title">Trust debt: how AI products borrow from users and rarely pay back</h2>
+        <p class="idx-post-pull">We are building on borrowed confidence. The question isn't whether users trust AI — it's whether the systems deserve it.</p>
+        <div class="idx-post-tags">
+          <span class="idx-tag">Essay</span>
+          <span class="idx-tag">AI Design</span>
+        </div>
+      </div>
+      <div class="idx-post-right">
+        <span class="idx-post-readtime">10 min read</span>
+        <a class="idx-read-link" href="#">Read →</a>
+      </div>
+    </div>
+
+    <div class="idx-post">
+      <div class="idx-post-meta">
+        <span class="idx-post-issue">No. 004</span>
+        <span class="idx-post-date">Mar 2026</span>
+      </div>
+      <div class="idx-post-center">
+        <h2 class="idx-post-title">Prototyping at the speed of thought: what fast AI iteration actually costs</h2>
+        <p class="idx-post-pull">Speed is not neutral. When we prototype faster than we can think, we ship assumptions instead of decisions.</p>
+        <div class="idx-post-tags">
+          <span class="idx-tag">Essay</span>
+          <span class="idx-tag">AI Design</span>
+        </div>
+      </div>
+      <div class="idx-post-right">
+        <span class="idx-post-readtime">7 min read</span>
+        <a class="idx-read-link" href="#">Read →</a>
+      </div>
+    </div>
+
+    <div class="idx-post">
+      <div class="idx-post-meta">
+        <span class="idx-post-issue">No. 005</span>
+        <span class="idx-post-date">Feb 2026</span>
+      </div>
+      <div class="idx-post-center">
+        <h2 class="idx-post-title">The quiet failure mode: when inclusive design becomes a checkbox</h2>
+        <p class="idx-post-pull">Accessibility done right is invisible. Accessibility done for compliance is a liability dressed up as a feature.</p>
+        <div class="idx-post-tags">
+          <span class="idx-tag">Essay</span>
+          <span class="idx-tag">Accessibility</span>
+        </div>
+      </div>
+      <div class="idx-post-right">
+        <span class="idx-post-readtime">9 min read</span>
+        <a class="idx-read-link" href="#">Read →</a>
+      </div>
+    </div>
+
+    <div class="idx-post">
+      <div class="idx-post-meta">
+        <span class="idx-post-issue">No. 006</span>
+        <span class="idx-post-date">Jan 2026</span>
+      </div>
+      <div class="idx-post-center">
+        <h2 class="idx-post-title">What HCI actually means in 2026 — and why most teams get it wrong</h2>
+        <p class="idx-post-pull">Human-Computer Interaction used to mean making software easier to use. Now it means something harder and more consequential.</p>
+        <div class="idx-post-tags">
+          <span class="idx-tag">Essay</span>
+          <span class="idx-tag">AI Design</span>
+        </div>
+      </div>
+      <div class="idx-post-right">
+        <span class="idx-post-readtime">11 min read</span>
+        <a class="idx-read-link" href="#">Read →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="idx-footer">
+    <span class="idx-footer-copy">© HCI Design Lab 2026 — Reno, NV</span>
+    <a class="idx-footer-email" href="mailto:hello@hcidesignlab.com">hello@hcidesignlab.com</a>
+  </footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.idx-filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.idx-filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>

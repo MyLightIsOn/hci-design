@@ -1,0 +1,492 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+  .prj-wrap {
+    background: #F5F2EB;
+    color: #1A1917;
+    font-family: 'DM Sans', sans-serif;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .prj-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 36px;
+    border-bottom: 0.5px solid rgba(26,25,23,0.15);
+  }
+  .prj-nav-logo {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #1A1917;
+    text-decoration: none;
+  }
+  .prj-nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .prj-nav-links a {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #5C5A56;
+    text-decoration: none;
+  }
+  .prj-nav-links a:hover { color: #C4521A; }
+  .prj-nav-links a.active { color: #C4521A; }
+
+  .prj-header {
+    padding: 56px 36px 44px;
+    border-bottom: 0.5px solid rgba(26,25,23,0.15);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: end;
+  }
+  .prj-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #C4521A;
+    margin-bottom: 16px;
+  }
+  .prj-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: #1A1917;
+    margin: 0;
+  }
+  .prj-title-dot { color: #C4521A; }
+  .prj-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: #5C5A56;
+    line-height: 1.7;
+    margin: 0 0 20px;
+  }
+  .prj-count {
+    font-size: 12px;
+    color: #9B9891;
+    letter-spacing: 0.06em;
+  }
+  .prj-count span { color: #C4521A; font-weight: 500; }
+
+  .prj-filter-bar {
+    padding: 16px 36px;
+    border-bottom: 0.5px solid rgba(26,25,23,0.15);
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .prj-filter-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9B9891;
+    margin-right: 8px;
+  }
+  .prj-filter-btn {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #5C5A56;
+    background: none;
+    border: 0.5px solid rgba(26,25,23,0.2);
+    border-radius: 2px;
+    padding: 5px 12px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.15s;
+  }
+  .prj-filter-btn:hover { border-color: #C4521A; color: #C4521A; }
+  .prj-filter-btn.active {
+    background: #1A1917;
+    color: #F5F2EB;
+    border-color: #1A1917;
+  }
+
+  .prj-hero {
+    margin: 36px 36px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    height: 320px;
+    background: #1A1917;
+    cursor: pointer;
+  }
+  .prj-hero-img {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #2C2A26 0%, #1A1917 50%, #0F0E0C 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .prj-hero-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background-image: repeating-linear-gradient(
+      0deg, transparent, transparent 32px, rgba(245,242,235,0.8) 32px, rgba(245,242,235,0.8) 33px
+    ), repeating-linear-gradient(
+      90deg, transparent, transparent 32px, rgba(245,242,235,0.8) 32px, rgba(245,242,235,0.8) 33px
+    );
+  }
+  .prj-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,9,8,0.88) 0%, rgba(10,9,8,0.2) 55%, transparent 100%);
+  }
+  .prj-hero-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 32px;
+  }
+  .prj-hero-badge {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #F5C89A;
+    background: rgba(196,82,26,0.35);
+    border: 0.5px solid rgba(196,82,26,0.5);
+    padding: 4px 10px;
+    border-radius: 2px;
+    margin-bottom: 14px;
+  }
+  .prj-hero-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: #F5F2EB;
+    margin: 0 0 10px;
+    line-height: 1.15;
+  }
+  .prj-hero-desc {
+    font-size: 13px;
+    color: rgba(245,242,235,0.7);
+    line-height: 1.55;
+    margin: 0 0 18px;
+    max-width: 520px;
+  }
+  .prj-hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .prj-hero-tags { display: flex; gap: 6px; }
+  .prj-hero-tag {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(245,242,235,0.6);
+    border: 0.5px solid rgba(245,242,235,0.2);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+  .prj-hero-sep { color: rgba(245,242,235,0.2); font-size: 12px; }
+  .prj-hero-role {
+    font-size: 12px;
+    color: rgba(245,242,235,0.45);
+  }
+  .prj-hero-cta {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #F5F2EB;
+    text-decoration: none;
+    border-bottom: 1px solid #C4521A;
+    padding-bottom: 2px;
+  }
+
+  .prj-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px 36px 36px;
+  }
+
+  .prj-card {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 0.5px solid rgba(26,25,23,0.12);
+    background: #EFECE4;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .prj-card:hover { border-color: rgba(196,82,26,0.4); }
+  .prj-card:hover .prj-card-title { color: #C4521A; }
+
+  .prj-card-thumb {
+    height: 160px;
+    background: #1A1917;
+    position: relative;
+    overflow: hidden;
+  }
+  .prj-card-thumb-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.07;
+    background-image: repeating-linear-gradient(
+      0deg, transparent, transparent 24px, rgba(245,242,235,0.8) 24px, rgba(245,242,235,0.8) 25px
+    ), repeating-linear-gradient(
+      90deg, transparent, transparent 24px, rgba(245,242,235,0.8) 24px, rgba(245,242,235,0.8) 25px
+    );
+  }
+  .prj-card-thumb-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,9,8,0.7) 0%, rgba(10,9,8,0.1) 70%, transparent 100%);
+  }
+  .prj-card-thumb-type {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245,242,235,0.6);
+    border: 0.5px solid rgba(245,242,235,0.2);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+  .prj-card-thumb-year {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    font-size: 11px;
+    color: rgba(245,242,235,0.35);
+  }
+
+  .prj-card-body { padding: 18px 20px 20px; }
+  .prj-card-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: #1A1917;
+    margin: 0 0 7px;
+    line-height: 1.3;
+    transition: color 0.15s;
+  }
+  .prj-card-desc {
+    font-size: 12px;
+    color: #5C5A56;
+    line-height: 1.55;
+    margin: 0 0 14px;
+  }
+  .prj-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .prj-card-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+  .prj-card-tag {
+    font-size: 10px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #7A3A12;
+    background: rgba(196,82,26,0.1);
+    padding: 2px 8px;
+    border-radius: 2px;
+  }
+  .prj-card-link {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #9B9891;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.15s;
+  }
+  .prj-card:hover .prj-card-link { color: #C4521A; }
+
+  .prj-footer {
+    padding: 28px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 0.5px solid rgba(26,25,23,0.15);
+  }
+  .prj-footer-copy { font-size: 12px; color: #9B9891; }
+  .prj-footer-email {
+    font-size: 12px;
+    color: #5C5A56;
+    text-decoration: none;
+    border-bottom: 0.5px solid rgba(196,82,26,0.4);
+    padding-bottom: 1px;
+  }
+</style>
+
+<div class="prj-wrap">
+
+  <nav class="prj-nav">
+    <a class="prj-nav-logo" href="#">HCI Design Lab</a>
+    <ul class="prj-nav-links">
+      <li><a href="#" class="active">Work</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Lab Notes</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="prj-header">
+    <div>
+      <p class="prj-eyebrow">Selected work</p>
+      <h1 class="prj-title">Projects<span class="prj-title-dot">.</span></h1>
+    </div>
+    <div>
+      <p class="prj-desc">A selection of AI, accessibility, and human-centered design projects — built, studied, and shipped.</p>
+      <p class="prj-count"><span>5</span> projects</p>
+    </div>
+  </header>
+
+  <div class="prj-filter-bar">
+    <span class="prj-filter-label">Filter</span>
+    <button class="prj-filter-btn active">All</button>
+    <button class="prj-filter-btn">AI</button>
+    <button class="prj-filter-btn">Accessibility</button>
+    <button class="prj-filter-btn">UX Research</button>
+    <button class="prj-filter-btn">Full Stack</button>
+  </div>
+
+  <div style="padding: 36px 36px 0;">
+
+    <div class="prj-hero">
+      <div class="prj-hero-img">
+        <div class="prj-hero-pattern"></div>
+      </div>
+      <div class="prj-hero-overlay"></div>
+      <a class="prj-hero-cta" href="#">View project →</a>
+      <div class="prj-hero-content">
+        <span class="prj-hero-badge">Featured — 2026</span>
+        <h2 class="prj-hero-title">a11y Logger</h2>
+        <p class="prj-hero-desc">An AI-powered accessibility issue tracker that detects, enriches, and consolidates audit findings — reducing logging time by 24% across a 20-person usability study.</p>
+        <div class="prj-hero-meta">
+          <div class="prj-hero-tags">
+            <span class="prj-hero-tag">AI</span>
+            <span class="prj-hero-tag">Accessibility</span>
+            <span class="prj-hero-tag">Full Stack</span>
+          </div>
+          <span class="prj-hero-sep">·</span>
+          <span class="prj-hero-role">Designer &amp; Developer</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="prj-grid">
+
+    <div class="prj-card">
+      <div class="prj-card-thumb">
+        <div class="prj-card-thumb-pattern"></div>
+        <div class="prj-card-thumb-overlay"></div>
+        <span class="prj-card-thumb-type">UX Research</span>
+        <span class="prj-card-thumb-year">2025</span>
+      </div>
+      <div class="prj-card-body">
+        <h3 class="prj-card-title">Conversational AI Onboarding Study</h3>
+        <p class="prj-card-desc">How first-time users form mental models of AI assistants — and where those models break down.</p>
+        <div class="prj-card-footer">
+          <div class="prj-card-tags">
+            <span class="prj-card-tag">AI</span>
+            <span class="prj-card-tag">UX Research</span>
+          </div>
+          <a class="prj-card-link" href="#">View →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="prj-card">
+      <div class="prj-card-thumb">
+        <div class="prj-card-thumb-pattern"></div>
+        <div class="prj-card-thumb-overlay"></div>
+        <span class="prj-card-thumb-type">AI Tool</span>
+        <span class="prj-card-thumb-year">2025</span>
+      </div>
+      <div class="prj-card-body">
+        <h3 class="prj-card-title">Prototype Velocity Dashboard</h3>
+        <p class="prj-card-desc">An internal tool for tracking AI-assisted prototype iteration cycles and surfacing bottlenecks in the design-to-test pipeline.</p>
+        <div class="prj-card-footer">
+          <div class="prj-card-tags">
+            <span class="prj-card-tag">AI</span>
+            <span class="prj-card-tag">Full Stack</span>
+          </div>
+          <a class="prj-card-link" href="#">View →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="prj-card">
+      <div class="prj-card-thumb">
+        <div class="prj-card-thumb-pattern"></div>
+        <div class="prj-card-thumb-overlay"></div>
+        <span class="prj-card-thumb-type">Accessibility</span>
+        <span class="prj-card-thumb-year">2024</span>
+      </div>
+      <div class="prj-card-body">
+        <h3 class="prj-card-title">WCAG Audit Framework for AI Interfaces</h3>
+        <p class="prj-card-desc">A systematic audit methodology for evaluating AI-generated UI against WCAG 2.2 — built for dynamic content and assistive technology edge cases.</p>
+        <div class="prj-card-footer">
+          <div class="prj-card-tags">
+            <span class="prj-card-tag">Accessibility</span>
+            <span class="prj-card-tag">UX Research</span>
+          </div>
+          <a class="prj-card-link" href="#">View →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="prj-card">
+      <div class="prj-card-thumb">
+        <div class="prj-card-thumb-pattern"></div>
+        <div class="prj-card-thumb-overlay"></div>
+        <span class="prj-card-thumb-type">Workshop</span>
+        <span class="prj-card-thumb-year">2024</span>
+      </div>
+      <div class="prj-card-body">
+        <h3 class="prj-card-title">Inclusive Design Enablement Workshop</h3>
+        <p class="prj-card-desc">A hands-on curriculum for non-technical product teams covering accessibility principles, AI ethics, and practical inclusive design patterns.</p>
+        <div class="prj-card-footer">
+          <div class="prj-card-tags">
+            <span class="prj-card-tag">Accessibility</span>
+            <span class="prj-card-tag">AI</span>
+          </div>
+          <a class="prj-card-link" href="#">View →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="prj-footer">
+    <span class="prj-footer-copy">© HCI Design Lab 2026 — Reno, NV</span>
+    <a class="prj-footer-email" href="mailto:hello@hcidesignlab.com">hello@hcidesignlab.com</a>
+  </footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.prj-filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.prj-filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
