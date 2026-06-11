@@ -1,0 +1,39 @@
+---
+title: "Designing AI that sees what humans miss: the a11y Logger"
+slug: "a11y-logger"
+issue: "001"
+date: "2026-06-01"
+tags: ["Case Study", "Accessibility", "AI Design"]
+readTime: "12 min read"
+lede: "Accessibility issues are invisibly logged manually. What happens when you give teams an AI system that detects, categorizes, and summarizes them automatically — and then actually study whether it works?"
+---
+
+## The problem with manual accessibility logging
+
+During my time as product manager at an agency, I consistently ran into the friction of accessibility. The work itself wasn't difficult — but the logging was. Testers would flag the same issues repeatedly across products, creating redundant reports that were hard to triage, harder to act on, and nearly impossible to share meaningfully across teams.
+
+Accessibility reports tend to accumulate for non-technical stakeholders. They often require extra interpretation to be actionable. The real cost isn't finding issues — it's communicating them in a way that drives remediation.
+
+> The best accessibility tools don't make experts faster. They make their expertise legible to everyone else in the room.
+
+## A multi-agent workflow, not a single model
+
+The core insight was that accessibility logging isn't one problem — it's three sequential ones: detection, enrichment, and communication. Building a single model to do all three collapses distinctions that matter.
+
+Three agents handle the core work. Issue Refinement expands titles and descriptions, suggests task-level fixes, and flags issues for technical and non-technical audiences. Report Generation produces an executive summary with a separate analytics summary. A Reduce/Merge agent consolidates duplicate issues across test runs — the hardest part of any multi-session accessibility audit.
+
+## Does it actually work? What 20 participants told us
+
+Rather than ship and hope, I ran a moderated usability study with 20 participants split across two cohorts: accessibility professionals with 10+ years of experience, and developers currently working on accessibility projects.
+
+**84%** of participants rated AI-generated issue descriptions as accurate or better than their own manual notes.
+
+**−24%** median reduction in time to log a difficulty-tier issue compared to the manual baseline.
+
+**+5%** accuracy improvement on AI-assisted issue descriptions versus manual logging alone.
+
+## What this means for AI-assisted design tooling
+
+The a11y Logger is lean and opinionated. It doesn't try to replace expert judgment — it tries to remove the tax on it. The most important design decision wasn't a UI choice or a model choice. It was the decision to keep humans in the loop at every critical handoff.
+
+The system is now being used across test campaigns. Next: exploring real-time detection during live user sessions.
