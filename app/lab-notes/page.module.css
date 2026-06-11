@@ -1,0 +1,124 @@
+.header {
+  padding: 56px 36px 44px;
+  border-bottom: 0.5px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: end;
+}
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.title {
+  font-family: var(--font-serif);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.dot { color: var(--accent); }
+.desc {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--ink-dim);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.count { font-size: 12px; color: var(--ink-ghost); }
+.count span { color: var(--accent); font-weight: 500; }
+
+/* Post list */
+.list { padding: 0 36px; }
+
+.post {
+  display: grid;
+  grid-template-columns: 96px 1fr 180px;
+  gap: 28px;
+  padding: 28px 0;
+  border-bottom: 0.5px solid var(--border-light);
+  align-items: start;
+  cursor: pointer;
+  color: inherit;
+}
+.post:hover .postTitle { color: var(--accent); }
+
+.featured {
+  background: rgba(196,82,26,0.05);
+  border-left: 2px solid var(--accent);
+  padding-left: 28px;
+  margin-left: -28px;
+}
+.featuredBadge {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.postMeta { padding-top: 4px; }
+.postIssue {
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 4px;
+}
+.postDate {
+  font-size: 12px;
+  color: var(--ink-ghost);
+  display: block;
+  line-height: 1.5;
+}
+
+.postTitle {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-weight: 400;
+  color: var(--ink);
+  margin: 0 0 9px;
+  line-height: 1.25;
+  transition: color 0.15s;
+}
+.postPull {
+  font-size: 13px;
+  color: var(--ink-dim);
+  font-style: italic;
+  line-height: 1.55;
+  margin: 0 0 12px;
+}
+.postTags { display: flex; gap: 6px; flex-wrap: wrap; }
+.postTag {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+  background: var(--accent-bg);
+  padding: 3px 9px;
+  border-radius: 2px;
+}
+
+.postRight { padding-top: 4px; text-align: right; }
+.readTime {
+  font-size: 12px;
+  color: var(--ink-ghost);
+  display: block;
+  margin-bottom: 12px;
+}
+.readLink {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+  transition: color 0.15s;
+}
+.readLink:hover { color: var(--accent); }
