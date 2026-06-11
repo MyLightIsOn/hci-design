@@ -1,103 +1,122 @@
-import Image from "next/image";
+import Link from "next/link";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
+import ScrollReveal from "@/components/ScrollReveal";
+import { getAllPosts } from "@/lib/posts";
+import { projects } from "@/lib/projects";
+import styles from "./page.module.css";
 
-export default function Home() {
+export default function HomePage() {
+  const posts = getAllPosts().slice(0, 3);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>
+      <Nav />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      {/* Hero */}
+      <section className={styles.hero}>
+        <p className={styles.eyebrow}>Human AI Creative Studio — Reno, NV</p>
+        <h1 className={styles.heroTitle}>
+          Human<span className={styles.dot}>.</span><br />
+          <em>AI Experience</em><br />
+          Design<span className={styles.dot}>.</span>
+        </h1>
+        <p className={styles.heroSub}>
+          We design systems where artificial intelligence supports, augments, and adapts
+          to human needs — creating intuitive, inclusive, and empowering interactions.
+        </p>
+        <Link href="/#services" className={styles.heroCta}>
+          View our services
+        </Link>
+      </section>
+
+      {/* Services */}
+      <ScrollReveal>
+        <section className={styles.section} id="services">
+          <p className={styles.sectionLabel}>What we do</p>
+          <div className={styles.services}>
+            {[
+              { num: "01", title: "Fast AI Prototyping", body: "Rapidly turn concepts into working prototypes. Test ideas with real users before investing in full-scale development." },
+              { num: "02", title: "Human-Centered AI Design", body: "Interfaces that prioritize usability, trust, and inclusivity — AI tools that feel intuitive and supportive of real people's needs." },
+              { num: "03", title: "Custom AI Solutions", body: "Tailored AI-driven tools, dashboards, and workflows that integrate seamlessly into your existing systems." },
+              { num: "04", title: "AI Training + Enablement", body: "Workshops and hands-on guidance that demystify AI and empower your organization to lead confidently." },
+            ].map((s) => (
+              <div key={s.num} className={styles.service}>
+                <p className={styles.serviceNum}>{s.num}</p>
+                <h3 className={styles.serviceTitle}>{s.title}</h3>
+                <p className={styles.serviceBody}>{s.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </ScrollReveal>
+
+      {/* Selected Work */}
+      <ScrollReveal>
+        <section className={styles.section}>
+          <div className={styles.workHeader}>
+            <p className={styles.sectionLabel} style={{ marginBottom: 0 }}>Selected work</p>
+            <Link href="/work" className={styles.seeAll}>See all projects</Link>
+          </div>
+          <div className={styles.workGrid}>
+            {projects.slice(0, 2).map((p) => (
+              <Link href="/work" key={p.slug} className={styles.workCard}>
+                <div className={styles.workThumb}>
+                  <div className={styles.thumbPattern} />
+                  <div className={styles.thumbOverlay} />
+                  <span className={styles.thumbType}>{p.type}</span>
+                </div>
+                <div className={styles.workCardBody}>
+                  <h3 className={styles.workCardTitle}>{p.title}</h3>
+                  <div className={styles.workCardTags}>
+                    {p.tags.map((t) => <span key={t} className={styles.workTag}>{t}</span>)}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      </ScrollReveal>
+
+      {/* About */}
+      <ScrollReveal>
+        <section className={styles.section}>
+          <div className={styles.about}>
+            <div className={styles.aboutLabel}>What is<br />HCI?</div>
+            <p className={styles.aboutBody}>
+              Human-Computer Interaction is the study of how people engage with technology. At HCI Design Lab,
+              we extend this to Human-AI experiences — designing systems where artificial intelligence supports,
+              augments, and adapts to human needs, creating interactions that are intuitive, inclusive, and
+              genuinely empowering.
+            </p>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      {/* Lab Notes Preview */}
+      <ScrollReveal>
+        <section className={styles.section}>
+          <div className={styles.notesHeader}>
+            <p className={styles.sectionLabel} style={{ marginBottom: 0 }}>Lab Notes</p>
+            <Link href="/lab-notes" className={styles.seeAll}>See all</Link>
+          </div>
+          <p className={styles.notesTagline}>Observations, opinions, and dispatches from the work.</p>
+          {posts.map((post) => (
+            <Link href={`/lab-notes/${post.slug}`} key={post.slug} className={styles.blogPost}>
+              <div className={styles.blogMeta}>
+                <span className={styles.blogIssue}>No. {post.issue}</span>
+                {new Date(post.date).toLocaleDateString("en-US", { month: "short", year: "numeric" })}
+              </div>
+              <div>
+                <h3 className={styles.blogTitle}>{post.title}</h3>
+                <p className={styles.blogPull}>{post.lede}</p>
+              </div>
+            </Link>
+          ))}
+        </section>
+      </ScrollReveal>
+
+      <Footer />
+    </>
   );
 }
