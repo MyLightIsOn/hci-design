@@ -15,7 +15,7 @@ export default function HomePage() {
 
       {/* Hero */}
       <section className={styles.hero}>
-        <p className={styles.eyebrow}>Human AI Creative Studio — Reno, NV</p>
+        <p className={styles.eyebrow}>Human AI Creative Studio</p>
         <h1 className={styles.heroTitle}>
           Human<span className={styles.dot}>.</span><br />
           <em>AI Experience</em><br />
@@ -23,7 +23,7 @@ export default function HomePage() {
         </h1>
         <p className={styles.heroSub}>
           We design systems where artificial intelligence supports, augments, and adapts
-          to human needs — creating intuitive, inclusive, and empowering interactions.
+          to human needs. Creating intuitive, inclusive, and empowering interactions.
         </p>
         <Link href="/#services" className={styles.heroCta}>
           View our services

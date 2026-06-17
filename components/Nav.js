@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./Nav.module.css";
 
 export default function Nav({ active }) {
@@ -10,7 +11,10 @@ export default function Nav({ active }) {
   return (
     <>
       <nav className={styles.nav}>
-        <Link href="/" className={styles.logo} onClick={() => setOpen(false)}>HCI Design Lab</Link>
+        <Link href="/" className={styles.logo} onClick={() => setOpen(false)}>
+          <Image src="/logo_transparent.png" alt="" width={28} height={28} className={styles.logoMark} />
+          HCI Design Lab
+        </Link>
         <ul className={styles.links}>
           <li><Link href="/work" className={active === "work" ? styles.active : ""}>Work</Link></li>
           <li><Link href="/#services" className={active === "services" ? styles.active : ""}>Services</Link></li>
