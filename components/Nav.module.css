@@ -4,6 +4,8 @@
   align-items: center;
   padding: 20px 36px;
   border-bottom: 0.5px solid var(--border);
+  position: relative;
+  z-index: 100;
 }
 
 .logo {
@@ -31,4 +33,81 @@
 .links a:hover,
 .active {
   color: var(--accent);
+}
+
+/* Hamburger button — hidden on desktop */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.bar {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--ink);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  transform-origin: center;
+}
+
+.barTop  { transform: translateY(6.5px) rotate(45deg); }
+.barMid  { opacity: 0; }
+.barBot  { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Full-screen overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+
+.overlayLinks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.overlayLinks a {
+  font-size: 22px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  transition: color 0.15s;
+}
+
+.overlayLinks a:hover,
+.overlayLinks .active {
+  color: var(--accent);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Mobile breakpoint */
+@media (max-width: 640px) {
+  .nav {
+    padding: 16px 20px;
+  }
+
+  .links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
 }
