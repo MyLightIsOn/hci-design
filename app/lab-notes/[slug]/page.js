@@ -34,6 +34,7 @@ export default async function PostPage({ params }) {
     <>
       <Nav active="lab-notes" />
 
+      <div className={styles.page}>
       <header className={styles.header}>
         <div className={styles.breadcrumb}>
           <Link href="/lab-notes">Lab Notes</Link>
@@ -86,6 +87,7 @@ export default async function PostPage({ params }) {
         <Link href="/lab-notes" className={styles.backLink}>← Back to Lab Notes</Link>
         <span className={styles.footerCopy}>© HCI Design Lab 2026</span>
       </footer>
+      </div>
     </>
   );
 }
