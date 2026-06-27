@@ -5,22 +5,22 @@ issue: "001"
 date: "2026-03-01"
 tags: ["Essay", "AI Design", "Research"]
 readTime: "14 min read"
-lede: "Most AI products are designed to maximize user confidence. The research on automation trust says that is the wrong goal. Trust that outruns a system's actual capabilities does not stay borrowed for long."
+lede: "Most AI products are designed to maximize user confidence, but the research on automation trust says that is the wrong goal. Trust that outruns a system's actual capabilities does not stay trusted for long."
 ---
 
 ## Two ways to fail
 
 Every AI product failure is one of two things.
 
-The user trusted it too much. They accepted an output they should have questioned, acted on it, and something went wrong. Or they walked away too soon. They encountered one bad output and stopped using a tool that would have served them well.
+The user trusted it too much and they accepted an output they should have questioned, acted on it, and something went wrong. Or they walked away too soon. They encountered one bad output and stopped using a tool that would have served them well.
 
-Researchers who study human-automation interaction call these misuse and disuse. Misuse is overreliance: the user inadvertently violates critical assumptions and relies on the system when they should not. Disuse is underutilization: the user rejects a capable tool because they do not trust it enough to engage with it. Both are calibration failures. Both are design problems (Parasuraman & Riley, 1997).
+Researchers who study human-automation interaction call these misuse and disuse. Misuse is overreliance. It is when the user inadvertently violates critical assumptions and relies on the system when they should not. Disuse is underutilization. This is when the user rejects a capable tool because they do not trust it enough to engage with it. Both are calibration failures and both are design problems (Parasuraman & Riley, 1997).
 
-The instinct in AI product development is to treat the first as success and the second as a user education problem. If people are using the tool, it is working. If they are not, they need better onboarding. The research does not support either interpretation.
+The instinct in AI product development is to treat the first as success because people are at least using the tool. The second is seen as a user education problem becuase people are not using the tool so they need better onboarding. The research does not support either interpretation.
 
-Parasuraman and Riley (1997) documented this studying automation failures across aviation, process control, and nuclear operations. In one case, pilots trusted an autopilot that was failing and did not intervene until it was too late. In another, operators found alarm systems so unreliable that they taped over the buzzers rather than deal with the noise. Two accidents. Two failure modes. Both caused by the same underlying problem: the operator's trust was not calibrated to what the system could actually do.
+Parasuraman and Riley (1997) documented this studying automation failures across aviation, process control, and nuclear operations. In one case, pilots trusted an autopilot that was failing and did not intervene until it was too late. In another, operators found alarm systems so unreliable that they taped over the buzzers rather than address why it was going off. These are two failure modes both caused by the same underlying problem that the operator's trust was not calibrated to what the system could actually do.
 
-The autopilot scenario feels like a story about overconfident users. It is not. It is a story about systems designed to project competence without communicating limitations. The operators who taped over the buzzers were not reckless either. They were responding rationally to a system that had cried wolf so often that they no longer trusted its warnings. The design created the distrust. The design owned the consequence.
+The autopilot scenario feels like a story about users overconfident in the system. However, it is really a story about systems designed to project competence without communicating limitations. The operators who taped over the buzzers were not reckless either. They were responding rationally to a system that had cried wolf so often that they no longer trusted its warnings. The designs created the distrust.
 
 <figure>
   <img src="/lab-notes-images/001/1.png" alt="The trust calibration spectrum. Disuse and misuse sit on opposite ends. Appropriate reliance is the design target, not a point on a scale." />
@@ -31,13 +31,13 @@ The autopilot scenario feels like a story about overconfident users. It is not. 
 
 ## What trust actually is
 
-Trust is not confidence. It is not the belief that a system will work. It is not cooperation or predictability, though both are often mistaken for it.
+Trust is not confidence, nor is it the belief that a system will work. It is not cooperation or predictability, though all of these are often mistaken for trust.
 
-Mayer et al. (1995) drew this distinction in their model of organizational trust, which remains the most cited framework in the literature. A system can be predictably bad. An organization can be predictably self-serving. Predictability without good intent is not trust. It is pattern recognition. You learn what to expect and you adjust accordingly. That is not the same as extending vulnerability.
+Mayer et al. (1995) drew this distinction in their model of organizational trust, which remains the most cited framework in the literature. A system can be predictably bad. An organization can be predictably self-serving. Predictability without good intent is not trust. You learn what to expect and you adjust accordingly. This is pattern recognition.
 
-Trust, in their formulation, is the willingness of a party to be vulnerable to the actions of another party, based on the expectation that the other will perform a particular action important to the trustor, irrespective of the ability to monitor or control that other party. Two conditions have to be present: uncertainty and stakes. The trustor cannot fully verify what the trustee is doing, and they have something real to lose if the trustee fails them.
+Trust, in their formulation, is "the willingness of a party to be vulnerable to the actions of another party, based on the expectation that the other will perform a particular action important to the trustor, irrespective of the ability to monitor or control that other party". Two conditions have to be present for this to happen. Uncertainty and stakes. The trustor cannot fully verify what the trustee is doing, and they have something real to lose if the trustee fails them.
 
-Both conditions hold in almost every AI product interaction. The user cannot audit the model's output. They are staking something on it: a decision, a document, a professional judgment, a client deliverable. Trust is not a feature of the product. It is the relational condition that makes the product usable at all.
+Both conditions hold in almost every AI product interaction. If the user cannot audit the model's output, they are staking something on it. This could be a decision, a document, a professional judgment, a client deliverable, etc. Trust is not merely a feature of the product, it is the relational condition that makes the product usable at all.
 
 Lee and See (2004) make a related point. Trust guides reliance precisely when complexity and unanticipated situations make a complete understanding of the automation impractical. The more opaque the system, the more work trust has to do. Which means the more opaque the system, the more carefully trust has to be designed.
 
@@ -47,13 +47,13 @@ Lee and See (2004) make a related point. Trust guides reliance precisely when co
 
 Mayer et al. (1995) identified three components of trustworthiness. Each can fail independently.
 
-Ability is domain-specific competence. A system that writes excellent code is not thereby trusted to summarize clinical trials. A tool that reliably classifies accessibility violations is not therefore trusted to generate the prose explanation of why a criterion was failed. Ability is task-bound, and trust built in one domain does not transfer automatically to another. Products that present a single AI agent as universally capable are borrowing trust from one domain and spending it in another (Mayer et al., 1995).
+Ability is domain-specific competence. A system that writes excellent code is not thereby trusted to summarize clinical trials. Ability is task-bound, and trust built in one domain does not transfer automatically to another. Products that present a single AI agent as universally capable are borrowing trust from one domain and spending it in another (Mayer et al., 1995).
 
-Benevolence is orientation toward the user's interest, distinct from the product's interest. This is the component most AI product teams do not discuss. Engagement optimization, completion metrics, and upsell surfaces are benevolence questions. When a system nudges the user toward an action that benefits the product more than the user, that is a benevolence failure. It does not read as one because the interface does not label it as such. But the user eventually notices that their interest and the system's interest are not the same thing. Trust erodes accordingly, and the cause is rarely diagnosed correctly.
+Benevolence is orientation toward the user's interest, distinct from the product's interest. This is the component most AI product teams do not discuss. Engagement optimization, completion metrics, and upsell surfaces are benevolence questions. When a system nudges the user toward an action that benefits the product more than the user, that is a benevolence failure. It does not read as one because the interface does not label it as such, but the user eventually notices that their interest and the system's interest are not the same thing. Trust erodes accordingly, and the cause is rarely diagnosed correctly.
 
-Integrity is the match between what is claimed and what is delivered. This is where most AI trust damage originates. When a product claims high accuracy in its marketing and produces unreliable outputs in practice, that is an integrity failure. When a system presents uncertain, probabilistic outputs with the same confident tone it uses for well-established facts, that is also an integrity failure. The words are not wrong in any single instance. The gap is between the implied confidence and the actual confidence, and the user is left to discover the difference on their own.
+Integrity is the match between what is claimed and what is delivered. This is where most AI trust damage originates. When a product claims high accuracy in its marketing and produces unreliable outputs in practice, that is an integrity failure. When a system presents uncertain, probabilistic outputs with the same confident tone it uses for well-established facts, that is also an integrity failure. The words themselves may not be wrong in any single instance. The gap is between the implied confidence and the actual confidence, and the user is left to discover the difference on their own.
 
-Each component contributes to trustworthiness as a whole, but a deficit in any one is enough to undermine the rest. Baughan et al. (2023) found that response failures — outputs that were clearly wrong after the system had correctly heard and understood the user — damaged all three dimensions simultaneously. An integrity failure does not just reduce integrity perceptions. It revises the user's read of ability and benevolence at the same time.
+Each component contributes to trustworthiness as a whole, but a deficit in any one of them is enough to undermine the rest. Baughan et al. (2023) found that outputs that were clearly wrong after the system had correctly heard and understood the user (response failures) damaged all three dimensions simultaneously. An integrity failure does not only reduce integrity perceptions, instead it revises the user's read of ability and benevolence at the same time.
 
 <figure>
   <img src="/lab-notes-images/001/2.png" alt="Trustworthiness rests on three independent dimensions. A deficit in any one undermines the whole. Integrity failures do not remain isolated — they reach back and retroactively revise perceptions of ability and benevolence." />
@@ -64,15 +64,15 @@ Each component contributes to trustworthiness as a whole, but a deficit in any o
 
 ## Why trust is borrowed
 
-AI products earn trust through streaks. Reliable outputs accumulate credibility. Users learn to rely without verifying. That is not irrationality. It is an efficient adaptation to a tool that appears to work. The problem is what happens next.
+AI products earn trust through streaks. Reliable outputs accumulate credibility and users learn to rely without verifying. While it may sound irrational at time, it is an efficient adaptation to a tool that appears to work. The real problem is what happens next.
 
 Dietvorst et al. (2015) ran five studies on this and found something designers need to reckon with directly. People lose confidence in algorithmic forecasters faster than in human forecasters after seeing them make the same mistake, even when the algorithm's overall performance was better. The people who watched the algorithm outperform the human in the first stage of the study were, in every experiment, among the least likely to choose the algorithm afterward. Seeing the algorithm win, and then seeing it err, was worse than never seeing it perform at all.
 
-The mechanism is not disappointment from underperformance. It is the exposure to visible failure being enough to break the contract. A GPS that routes you into a traffic jam is less trusted afterward than a friend who gave you the same bad advice. Both were wrong. One is forgiven more readily because the psychological contract is different.
+A GPS that routes you into a traffic jam is less trusted afterward than a friend who gave you the same bad advice even though both were wrong. One is forgiven more readily because the psychological contract is different.
 
 The size of the error does not matter much either. Smaller algorithm errors did more damage to user confidence than larger human errors in the same studies (Dietvorst et al., 2015). A product cannot earn its way out of the trust problem by running up a long streak of correct outputs, because the credit does not accumulate at the same rate that the damage from visible failure depletes it.
 
-There is a setup problem too. People approach new automated systems with unrealistic expectations. Dietvorst et al. (2015) found that even participants with direct experience using a tool in the study expressed dramatically optimistic beliefs about what it should be able to do. What gets borrowed is trust against a standard no system can maintain. When the system fails, it is not falling from its actual capability level. It is falling from the level the user had been led to expect. That is partly a product problem and partly a marketing problem. Onboarding copy that overclaims does not just inflate adoption numbers. It shortens the window before the first trust collapse.
+There is a setup problem too. People approach new automated systems with unrealistic expectations. Dietvorst et al. (2015) found that even participants with direct experience using a tool in the study expressed dramatically optimistic beliefs about what it should be able to do. What gets borrowed is trust against a standard no system can maintain. When the system fails, it is not falling from its actual capability level. What is happening is that it is falling from the level the user had been led to expect. That is partly a product problem and partly a marketing problem. Onboarding copy that overclaims does not just inflate adoption numbers. It shortens the window before the first trust collapse.
 
 <figure>
   <img src="/lab-notes-images/001/3.png" alt="Trust accumulates slowly through reliable outputs and collapses sharply after a single visible failure. Recovery is slow and incomplete. The previous trust peak is rarely reached again." />
@@ -85,46 +85,46 @@ There is a setup problem too. People approach new automated systems with unreali
 
 None of this is a user problem.
 
-Parasuraman and Riley (1997) made the accountability argument plainly: automation does not replace the operator, it substitutes the designer for the operator. Every decision about what the AI surfaces, how it signals confidence, when it declines to answer, and what it presents as settled is the designer's judgment, running at scale, in every interaction, without the designer present to course-correct.
+Parasuraman and Riley (1997) made the accountability argument that automation does not replace the operator, it substitutes the designer for the operator. Every decision about what the AI surfaces, how it signals confidence, when it declines to answer, and what it presents as settled is the designer's judgment, running at scale, in every interaction, without the designer present to course-correct.
 
 When a human expert gets something wrong, one person is affected. When the designer's embedded judgment is wrong, every user who encounters that situation is affected simultaneously. That is a different failure mode than individual operator error. The scale changes what accountability requires.
 
-The positivity bias compounds the problem. Hoff and Bashir (2015) identified a consistent finding across automation trust studies: people approach new systems assuming they will perform at a high level, often higher than the system warrants. The initial trust is not earned. It is given. That dispositional optimism is the capital the product borrows before it has done anything to deserve it.
+The positivity bias compounds the problem. Hoff and Bashir (2015) identified a consistent finding across automation trust studies. People approach new systems assuming they will perform at a high level, often higher than the system warrants. The initial trust is not yet earned, it is given. That dispositional optimism is the capital the product borrows before it has done anything to deserve it.
 
-Lee and See (2004) are direct about what this means for design: the goal is not greater trust. It is appropriate trust. Calibration, the correspondence between a person's trust in the system and the system's actual capabilities, is the target. A product that makes users feel more confident than the system warrants is failing the calibration requirement. It is spending capital it cannot repay.
+Lee and See (2004) are direct about what this means for design. The goal is should be not greater trust. The true target should be appropriate trust or what they call calibration. Calibration is the correspondence between a person's trust in the system and the system's actual capabilities. A product that makes users feel more confident than the system warrants is failing the calibration requirement and spending capital it cannot repay.
 
 ---
 
 ## Applying the framework: an AI accessibility audit tool
 
-Consider a tool that does two things: structured issue logging tied to WCAG criteria, and AI-generated conformance narratives for reports. Two outputs, same interface, very different trust profiles.
+Consider a tool we've been working on that does two things. First, it does structured issue logging tied to WCAG criteria, and second, it creates AI-generated conformance narratives for reports. Two outputs, same interface, very different trust profiles.
 
 The structured logging is deterministic enough that users can verify it. A criterion was flagged or it was not. The logic is inspectable. If the tool flags a missing alt attribute, the user can check the element and confirm. Ability, benevolence, and integrity are all testable in that interaction.
 
-The AI-generated narrative is different. It synthesizes findings into prose that sounds authoritative, because that is what the model was trained to produce. But the confidence of the prose does not track the confidence of the underlying judgment. A generated paragraph explaining why a component fails WCAG 1.4.3 may be accurate, or it may be plausible-sounding and wrong in a way that only an expert reviewing it carefully would catch. In a client-facing report, that matters.
+The AI-generated narrative is different. It synthesizes findings into prose that sounds authoritative, because that is what the model was trained to produce. However, the confidence of the prose does not track the confidence of the underlying judgment. A generated paragraph explaining why a component fails WCAG 1.4.3 may be accurate, or it may be plausible-sounding and wrong in a way that only an expert reviewing it carefully would catch. In a client-facing report, that matters.
 
-If both outputs are presented with the same visual weight and the same confident tone, the designer has made an integrity decision by omission. There is no signal about which part to trust more. The user who verifies neither is not being careless. They are responding to a design that gave them no reason to distinguish between the two.
+If both outputs are presented with the same visual weight and the same confident tone, the designer has made an integrity decision by omission. There is no signal about which part to trust more. The user who verifies neither is not being careless, they are simply responding to a design that gave them no reason to distinguish between the two.
 
 <figure>
   <img src="/lab-notes-images/001/4.png" alt="Two outputs, two trust profiles. The design implications follow from the trust profile of each output type, not from the output's visual prominence in the interface." />
   <figcaption>Two outputs, two trust profiles. The design implications follow from the trust profile of each output type, not from the output's visual prominence in the interface.</figcaption>
 </figure>
 
-Applying the framework means making the distinction legible before the user discovers it through a failure. The structured logging and the generated narrative are different kinds of outputs with different confidence profiles. The interface should reflect that. Not with a disclaimer buried in a help modal, but with visual and interaction design that communicates the difference where the decision is actually made.
+Applying the framework means making the distinction legible before the user discovers it through a failure. The structured logging and the generated narrative are different kinds of outputs with different confidence profiles. The interface should reflect that. This shouldn't just be a disclaimer buried in a help modal, but instead a visual and interaction design that communicates the difference where the decision is actually made.
 
-The sequencing of trust-building matters too. Users should encounter the low-stakes, verifiable outputs first, enough times that their confidence in those outputs is calibrated correctly before they engage with the higher-stakes generative ones. A user who has logged fifty issues and confirmed the tool's structured outputs are reliable has a calibrated basis for deciding how carefully to review the AI-generated narrative. A user who encounters the narrative first, in a client deadline situation, is building trust on nothing.
+The sequencing of trust-building matters too. Users should encounter the low-stakes, verifiable outputs first, enough times that their confidence in those outputs is calibrated correctly before they engage with the higher-stakes generative ones. A user who has logged fifty issues and confirmed the tool's structured outputs are reliable has a calibrated basis for deciding how carefully to review the AI-generated narrative.
 
-When the generated narrative is wrong, and it will be, the response has to match the failure type. Baughan et al. (2023) found that errors users can attribute to ambiguity in their own input are forgiven. Errors the system made without ambiguity, where the output was clearly wrong and the user's input was clearly right, hit all three trust dimensions hard. A confident wrong answer in a client report is that second kind of failure. A generic "AI can make mistakes" disclaimer does not address the damage. It may worsen it by appearing to minimize what happened.
+If the generated narrative is wrong, the response has to match the failure type. Baughan et al. (2023) found that errors users can attribute to ambiguity in their own input are forgiven. Errors the system made without ambiguity, where the output was clearly wrong and the user's input was clearly right, hit all three trust dimensions hard. A confident wrong answer in a client report is that second kind of failure. A generic "AI can make mistakes" disclaimer does not address the damage and it may actually worsen it by appearing to minimize what happened.
 
-Trust repair after failure runs through low-stakes task success, not through explanation or apology (Baughan et al., 2023). A tool that routes every interaction through high-stakes outputs leaves no repair path. Structured logging, issue tagging, WCAG citation lookup: lower-stakes interactions in the same tool give users a way to rebuild confidence before they return to the generative output. One bad narrative should not end the relationship. The design has to make sure it does not.
+Trust repair after failure runs through low-stakes task success, not through explanation or apology (Baughan et al., 2023). A tool that routes every interaction through high-stakes outputs leaves no repair path. Structured logging, issue tagging, WCAG citation lookup are lower-stakes interactions in the same tool that give users a way to rebuild confidence before they return to the generative output. One bad narrative should not end the relationship. The design has to make sure it does not.
 
-None of these are edge cases. They are the normal operating conditions of a tool that combines deterministic and generative outputs in the same interface. The trust problem has to be designed for before the first user encounters it.
+Keep in mind that none of these are edge cases. They are the normal operating conditions of a tool that combines deterministic and generative outputs in the same interface. The trust problem has to be designed for before the first user encounters it.
 
 ---
 
 ## The argument
 
-Trust in AI products is borrowed against an implicit contract: the system will perform a particular action that matters to the user, in a situation where the user cannot fully verify the output. That contract is created by design, by what the product claims, how it presents confidence, and what it asks users to stake on its outputs.
+Trust in AI products is borrowed against an implicit contract. The system will perform a particular action that matters to the user, in a situation where the user cannot fully verify the output. That contract is created by design, by what the product claims, how it presents confidence, and what it asks users to stake on its outputs.
 
 When the system fails visibly, the contract breaks. The damage is faster than most designers expect, and the recovery is slower. It does not run through explanation or accountability. It runs through low stakes, adjacent domains, and enough successful interactions that the user has a reason to try the harder thing again.
 
