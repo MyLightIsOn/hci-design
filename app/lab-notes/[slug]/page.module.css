@@ -78,16 +78,20 @@
 }
 
 /* MDX prose styles — using :global() for unscoped MDX output */
+.body :global(hr) {
+  display: none;
+}
+
 .body :global(h2) {
   font-family: var(--font-serif);
-  font-size: 24px;
+  font-size: 27px;
   font-weight: 700;
   color: var(--ink);
   margin: 32px 0 14px;
   line-height: 1.2;
 }
 .body :global(p) {
-  font-size: 15px;
+  font-size: 18px;
   color: var(--ink-muted);
   line-height: 1.8;
   margin: 0 0 18px;
