@@ -1,0 +1,50 @@
+.main {
+  min-height: 100vh;
+}
+
+.header {
+  padding: 56px 36px 44px;
+  border-bottom: 0.5px solid var(--border);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.title {
+  font-family: var(--font-serif);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.dot { color: var(--accent); }
+
+.section {
+  padding: 52px 36px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.body {
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--ink-dim);
+  line-height: 1.7;
+  max-width: 520px;
+  margin: 0 0 28px;
+}
+.email {
+  display: inline-block;
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--ink);
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 3px;
+}
+.email:hover { color: var(--accent); }
