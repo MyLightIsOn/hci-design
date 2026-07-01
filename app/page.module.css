@@ -34,7 +34,7 @@
 .heroTitle em { font-style: italic; font-weight: 400; color: var(--ink-muted); }
 .dot { color: var(--accent); }
 .heroSub {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 300;
   color: var(--ink-dim);
   margin: 20px 0 36px;
@@ -108,7 +108,7 @@
   line-height: 1.25;
 }
 .serviceBody {
-  font-size: 13px;
+  font-size: 18px;
   color: var(--ink-dim);
   line-height: 1.6;
 }
@@ -129,7 +129,7 @@
   color: var(--ink);
 }
 .aboutBody {
-  font-size: 14px;
+  font-size: 18px;
   color: var(--ink-muted);
   line-height: 1.75;
 }
@@ -265,7 +265,7 @@
   transition: color 0.15s;
 }
 .blogPull {
-  font-size: 13px;
+  font-size: 18px;
   color: var(--ink-dim);
   line-height: 1.55;
   font-style: italic;

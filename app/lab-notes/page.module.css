@@ -23,7 +23,7 @@
 }
 .dot { color: var(--accent); }
 .desc {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 300;
   color: var(--ink-dim);
   line-height: 1.7;
@@ -87,7 +87,7 @@
   transition: color 0.15s;
 }
 .postPull {
-  font-size: 13px;
+  font-size: 18px;
   color: var(--ink-dim);
   font-style: italic;
   line-height: 1.55;
