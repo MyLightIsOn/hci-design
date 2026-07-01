@@ -1,4 +1,6 @@
 .bar {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 16px 36px;
   border-bottom: 0.5px solid var(--border);
   display: flex;

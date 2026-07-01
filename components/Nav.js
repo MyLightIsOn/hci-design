@@ -18,7 +18,7 @@ export default function Nav({ active }) {
         <ul className={styles.links}>
           <li><Link href="/#services" className={active === "services" ? styles.active : ""}>Services</Link></li>
           <li><Link href="/lab-notes" className={active === "lab-notes" ? styles.active : ""}>Lab Notes</Link></li>
-          <li><Link href="/#contact" className={active === "contact" ? styles.active : ""}>Contact</Link></li>
+          <li><Link href="/contact" className={active === "contact" ? styles.active : ""}>Contact</Link></li>
         </ul>
         <button
           className={styles.hamburger}
@@ -37,7 +37,7 @@ export default function Nav({ active }) {
           <ul className={styles.overlayLinks} onClick={e => e.stopPropagation()}>
             <li><Link href="/#services" className={active === "services" ? styles.active : ""} onClick={() => setOpen(false)}>Services</Link></li>
             <li><Link href="/lab-notes" className={active === "lab-notes" ? styles.active : ""} onClick={() => setOpen(false)}>Lab Notes</Link></li>
-            <li><Link href="/#contact" className={active === "contact" ? styles.active : ""} onClick={() => setOpen(false)}>Contact</Link></li>
+            <li><Link href="/contact" className={active === "contact" ? styles.active : ""} onClick={() => setOpen(false)}>Contact</Link></li>
           </ul>
         </div>
       )}
