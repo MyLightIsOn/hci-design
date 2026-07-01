@@ -51,33 +51,6 @@ export default function HomePage() {
         </section>
       </ScrollReveal>
 
-      {/* Selected Work */}
-      <ScrollReveal>
-        <section className={styles.section}>
-          <div className={styles.workHeader}>
-            <p className={styles.sectionLabel} style={{ marginBottom: 0 }}>Selected work</p>
-            <Link href="/work" className={styles.seeAll}>See all projects</Link>
-          </div>
-          <div className={styles.workGrid}>
-            {projects.slice(0, 2).map((p) => (
-              <Link href="/work" key={p.slug} className={styles.workCard}>
-                <div className={styles.workThumb}>
-                  <div className={styles.thumbPattern} />
-                  <div className={styles.thumbOverlay} />
-                  <span className={styles.thumbType}>{p.type}</span>
-                </div>
-                <div className={styles.workCardBody}>
-                  <h3 className={styles.workCardTitle}>{p.title}</h3>
-                  <div className={styles.workCardTags}>
-                    {p.tags.map((t) => <span key={t} className={styles.workTag}>{t}</span>)}
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
-      </ScrollReveal>
-
       {/* About */}
       <ScrollReveal>
         <section className={styles.section}>

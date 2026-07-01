@@ -16,7 +16,6 @@ export default function Nav({ active }) {
           HCI Design Lab
         </Link>
         <ul className={styles.links}>
-          <li><Link href="/work" className={active === "work" ? styles.active : ""}>Work</Link></li>
           <li><Link href="/#services" className={active === "services" ? styles.active : ""}>Services</Link></li>
           <li><Link href="/lab-notes" className={active === "lab-notes" ? styles.active : ""}>Lab Notes</Link></li>
           <li><Link href="/#contact" className={active === "contact" ? styles.active : ""}>Contact</Link></li>
@@ -36,7 +35,6 @@ export default function Nav({ active }) {
       {open && (
         <div className={styles.overlay} onClick={() => setOpen(false)}>
           <ul className={styles.overlayLinks} onClick={e => e.stopPropagation()}>
-            <li><Link href="/work" className={active === "work" ? styles.active : ""} onClick={() => setOpen(false)}>Work</Link></li>
             <li><Link href="/#services" className={active === "services" ? styles.active : ""} onClick={() => setOpen(false)}>Services</Link></li>
             <li><Link href="/lab-notes" className={active === "lab-notes" ? styles.active : ""} onClick={() => setOpen(false)}>Lab Notes</Link></li>
             <li><Link href="/#contact" className={active === "contact" ? styles.active : ""} onClick={() => setOpen(false)}>Contact</Link></li>
