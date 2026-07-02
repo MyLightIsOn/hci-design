@@ -1,0 +1,186 @@
+---
+title: "Can a machine apply a structured conformance method? Notes from training AI on Trusted Tester"
+slug: "tt-auditor"
+issue: "002"
+date: "2026-06-20"
+tags: ["Accessibility", "AI Design", "Research", "Case Study"]
+readTime: "17 min read"
+lede: "The DHS Trusted Tester method was designed for people. When you replace the person with an AI, the procedure survives. The judgment does not transfer cleanly. What breaks, and where, turns out to be more instructive than what works."
+---
+
+## The experiment
+
+The DHS Trusted Tester (TT) method, version 5.1.3, is a structured conformance framework for testing web accessibility against Section 508 and WCAG 2.1 standards. DHS designed it to be procedural: each test condition specifies the steps, the evidence to collect, and the verdict to return. The verdicts are fixed. Pass, Fail, Does Not Apply, Not Tested.
+
+The TT Auditor was an experiment to see how far that structure could carry an AI pipeline. Could an AI apply the method reliably enough to be useful?
+
+To test that, I used the DHS Trusted Tester certification exam as a benchmark. The exam is 100 multiple-choice questions. Each question either asks the tester to evaluate a specific page from a test website using a named Test ID, or tests knowledge of the TT method itself. Every question has a single correct answer. That made it a usable ground truth: not a subjective expert panel, not a curated sample of violations, but an official answer key.
+
+The exam structure also introduced a variable worth naming early. In the directed format, each question identifies the test condition before the tester evaluates the page. The tester knows they are looking for test 4.D before they open the browser. In a real audit, there is no such hint. The auditor opens a page and determines which test conditions apply, then evaluates each one. These are different tasks. When I ran the TT Auditor against the directed exam, it scored 95%. When I ran it blind, without pre-identified test conditions, the score dropped to 77-81.4% depending on which pipeline version ran. Both numbers are real. They measure different things, and conflating them would misrepresent what the tool actually does.
+
+The rest of this article is an account of what the experiment found: how the pipeline was built, where performance improved and why, where it broke and what the breaks reveal, and what the results suggest about the right role for AI in structured conformance auditing.
+
+---
+
+## The assumption built into the method
+
+TT5 is procedural, but the procedure assumes something it cannot specify: a perceiver who understands accessibility well enough to recognize a real barrier when they see one.
+
+Consider test 7.A. The procedure says to check whether a meaningful image has a text alternative. The verdict criterion asks whether the alternative is *equivalent* — whether it conveys the same information to someone who cannot see the image. That word does a lot of work. It requires someone who knows what the image communicates, what context it sits in, and what a reader without vision needs to understand. The procedure cannot define equivalence in the abstract. It relies on the evaluator to know it when they see it.
+
+Test 7.C asks whether a background image is "the only means of conveying information." Test 13.A asks whether color is used as the *only* differentiator. Test 5.H requires observing what happens after a form is submitted. Every qualitative verdict criterion in TT5 leans on a human who already understands accessibility well enough to apply the standard correctly.
+
+Michael Polanyi described this gap as the difference between explicit knowledge and tacit knowledge. Procedures can be written down. The knowledge that makes them work cannot, at least not fully. The TT method documents what evaluators should do. It cannot document what they should know. That gap is visible when humans apply the method: Brajnik, Yesilada, and Harper (2011) found that applying the same structured method, expert evaluators found 71% of true accessibility barriers on average while nonexperts found 50%. The method did not close the gap between them. Expertise did.
+
+Dreyfus and Dreyfus (1986) described this as the difference between rule-following and pattern recognition. A novice works through a procedure step by step. An expert recognizes the problem state and moves forward without consciously running the decision tree. A certified Trusted Tester who has run hundreds of audits does not apply test 7.A by asking "is there alt text, and is it equivalent?" They look at the image and the alt text, and they know. The procedure got them there. It is not what they are doing anymore.
+
+When you operationalize TT5 into an AI pipeline, you get the procedure. The question is how much of the expertise travels with it.
+
+---
+
+## What automated tools could do before AI
+
+The gap the TT Auditor was built to close has been documented since at least 2011. Vigo and Brajnik (2011) put it plainly: automated metrics were fast but potentially invalid; human evaluation was valid but expensive. No method had demonstrated both.
+
+The numbers behind that conclusion were specific. Vigo, Brown, and Conway (2013) benchmarked six automated accessibility tools against WCAG 2.0 on real websites, with expert evaluators establishing ground truth. Coverage — the percentage of violated success criteria a tool reported at least one failure against — topped out at 50%. Completeness — the percentage of actual violations caught — ranged from 14% to 38%. Half of all success criteria went unanalyzed, and of the violations within analyzed criteria, roughly six out of ten went undetected.
+
+The tools that caught more violations also produced more false positives. The tools with higher completeness had higher error rates. Thoroughness and accuracy pulled against each other, and there was no configuration that resolved the tension (Vigo et al., 2013).
+
+What automated tools could not do was make the judgment that qualitative test conditions require. They could detect whether alt text existed. They could not evaluate whether it was adequate. The method needed a perceiver. The tools were not one.
+
+Vigo and Brajnik (2011) also found that the best automated metrics failed to discriminate reliably between accessible and inaccessible pages. The metrics that performed well on highly accessible pages produced similar results on inaccessible ones. The measurement problem was not only about accuracy. It was about validity. Even when tools produced numbers, there was no reliable way to know how close those numbers were to the truth.
+
+The TT Auditor entered a field where the measurement problem was still open.
+
+---
+
+## The build: architecture and what changed
+
+The TT Auditor has two components. Playwright collects evidence. Claude reasons about it. Keeping those functions separate was the first structural decision, and it proved to be the right one.
+
+A pipeline that collects evidence and reasons in a single pass cannot locate failure. A wrong verdict might come from bad evidence or from bad reasoning on good evidence. Separating the components means failures have addresses. A wrong answer can be traced back either to a gap in the evidence or to a reasoning error given complete evidence. That traceability drove most of the improvement work that followed.
+
+The opening score was 29 correct answers out of 70 scoreable questions — 41%. The tool was inspecting the login page. Playwright had no session credentials. Fixing that and integrating axe-core brought the score to 52%.
+
+The most instructive single change was a prompt edit. The original system prompt allowed the reasoner to return "Not Tested" whenever evidence was incomplete or the verdict uncertain. After analyzing wrong answers, one edit redefined "Not Tested" to its precise meaning — the test condition cannot be evaluated because the required page state does not exist — and required the reasoner to commit to a verdict rather than hedge. That edit gained seven correct answers in a single run, more than all the code changes before it combined (HCI Design Lab, 2026).
+
+Zhong, Chen, Chen, Fogarty, and Wobbrock (2025) found the same thing building ScreenAudit, an LLM-powered accessibility checker for Android apps. They tested prompt configurations varying the type of guidance provided and the degree of contextual instruction. General accessibility principles combined with explicit contextual framing produced the best results. Providing verbatim WCAG guidelines made no improvement over the base prompt; the guideline text was too abstract for the model to use effectively. Both projects arrived at the same conclusion independently: concrete situational framing beats rule enumeration.
+
+The next significant gain came from a pattern in the failures. Multiple test conditions were returning the same wrong verdict on the same pages. When failures cluster like that, the cause is upstream in evidence collection. Investigation found a frameset navigation problem: the tool was reading page metadata but missing frame content. Fixing the navigation gained thirteen correct answers at once (HCI Design Lab, 2026). Thirteen apparent reasoning failures had one cause.
+
+Adding a Playwright-driven interactive layer solved the focus visibility tests that static DOM inspection cannot handle. A screenshot cannot show whether a focus indicator disappears when an element receives keyboard focus. That requires navigating through the page and observing state. Interactive tests finished at 10 out of 13 on the blind run.
+
+Score progression: 41% at baseline, 52% after authentication and axe-core, 59% after the prompt edit, 72% after the frameset fix, 77-81.4% on the blind interactive runs (HCI Design Lab, 2026).
+
+<!-- DIAGRAM A: Score Progression
+     File: diagram-a-score-progression.png
+     Alt: Step chart showing TT Auditor score progression across five milestone changes: 41% baseline, 52% after authentication and axe-core integration, 59% after prompt revision, 72% after frameset fix, 77-81.4% on blind interactive runs. The prompt revision step is highlighted.
+     Caption: Score progression across five milestone changes. The prompt edit gained more than all code changes before it combined. Note: gains shown in percentage points. -->
+
+The 95% agent score on the directed exam belongs in a different column. In that setup, each question names the test condition in advance. The tool knew it was evaluating test 4.D before opening the page. Real auditing does not work that way. The directed exam score measures how well the tool reasons when it knows exactly what it is looking for. The blind score measures whether it can determine what to look for and then reason about it. Those are different capabilities, and the 14-point gap between them is a meaningful finding.
+
+---
+
+## Where it broke, and what the breaks show
+
+The failure clusters split into two categories that do not differ in degree. They differ in kind.
+
+The first is evidence failures. The tool returned the wrong verdict because it could not access the page state the test condition required.
+
+Test 2.A asks about audio that plays automatically. The TT Auditor inspects DOM structure and JavaScript. Audio triggered by a play call after user interaction is not present in the DOM at inspection time. It exists in page behavior, not page structure. The tool inspected a static snapshot of a page that would present an audio problem during actual use, and found nothing. Test 5.H requires observing the confirmation step after a form submission. The tool could not complete a payment form with test data. The evidence the test required existed after a transaction it could not execute. Test 2.D requires observing content that updates on a timer. The carousel interval exceeded the tool's observation window (HCI Design Lab, 2026).
+
+These failures share a structure: the right question, applied to a page state the tool could not reach. They are engineering problems. The interactive layer solved 4.D this way. Better session handling would solve 5.H for sites that accept test credentials.
+
+The second category is judgment failures. The tool had the evidence. It returned the wrong verdict anyway.
+
+Test 7.A requires that alt text be semantically equivalent to the image. The tool can read alt text. It cannot reliably judge whether someone who cannot see the image would understand the same thing from it that a sighted reader understands from the image. That requires knowing what the image communicates in context, which requires reading the page as a whole with a model of what different users need. The tool got some of these right. On the ones it got wrong, the evidence was present and the reasoning was coherent. The conclusion was calibrated differently than the exam's answer key.
+
+Test 12.B is the most instructive single failure. The exam's passing example of a descriptive page title is "EFG General Hospital." The tool flagged it and returned a wrong Fail verdict. This is not a reasoning error. The tool understood what a descriptive page title means. Its threshold for "descriptive enough" was higher than the exam's. The procedure defines the criterion qualitatively. The tool and the exam applied different calibrations to the same evidence.
+
+Brajnik et al. (2011) documented this among human evaluators. Even trained experts disagreed on qualitative verdict criteria. The calibration problem is not specific to AI. It is a property of qualitative conformance methods applied to edge cases. The machine makes the disagreement visible in the results. Human evaluators make it visible only when you compare their answers.
+
+Sweller (1988) offers an explanation for why the judgment failures cluster where they do. His analysis of expert-novice problem solving found that experts categorize problems by the solution principle that applies, while novices categorize by surface features. The tool's failures on test 9.C — consistent identification of repeated interface components across pages — follow this pattern exactly. The tool measured surface consistency: were the component labels the same? The test requires semantic consistency: does each instance serve the same function? Those are different questions. The tool answered the one its evidence naturally supported.
+
+Zhong et al. (2025) found the same pattern across error types in ScreenAudit. Detection of missing labels — a surface-level check — was above 90% across all configurations. Detection of structural and contextual errors ranged from 40% to 83%. The LLM's gains concentrated on contextual judgment. Its limits fell at the same place as automated tools: establishing what something means in context, as opposed to detecting whether something is present.
+
+<!-- DIAGRAM B: Where It Broke
+     File: diagram-b-where-it-broke.png
+     Alt: Two-column layout separating evidence failures from judgment failures. Left column lists tests 2.A, 2.D, 5.H, and 4.D as evidence failures with the common pattern: correct question, inaccessible page state. Right column lists tests 7.A, 7.C, 13.A, 9.C, and 12.B as judgment failures with the common pattern: accessible evidence, incorrect interpretation. A footer notes: evidence failures are engineering problems; judgment failures are expertise problems.
+     Caption: Two kinds of failure, two different causes. Evidence failures have engineering solutions. Judgment failures are where the procedure runs out before reaching a determinate answer. -->
+
+---
+
+## What the AI layer actually contributed
+
+ScreenAudit achieved 69.2% coverage compared to 31.3% for the best conventional checker in its study (Zhong et al., 2025). The LLM more than doubled detection. That is a large difference. The TT Auditor's 81.4% blind accuracy sits above the detection ceiling of any rule-based tool, on a benchmark that includes test conditions automated tools cannot evaluate at all.
+
+The gains were not spread evenly. The reasoner's value concentrated on test types that rule-based tools miss: multi-page consistency (tests 9.B and 9.C), keyboard access logic (4.A, 4.B), and the knowledge-question class where TT5 tests understanding of the standard rather than page content. On structural rule checks — whether a frame has a title, whether duplicate IDs exist, whether color contrast meets a numeric threshold — axe-core handled those reliably. The LLM added little. Where the answer is deterministic, rules are sufficient. Where it requires judgment, they are not.
+
+<!-- DIAGRAM C: Where the LLM Added Value
+     File: diagram-c-llm-value.png
+     Alt: Three-tier horizontal diagram showing a spectrum from left to right. Tier 1, rules sufficient: frame titles, duplicate IDs, color contrast ratios, ARIA role presence. Tier 2, LLM adds meaningful value: multi-page consistency (9.B, 9.C), keyboard access logic (4.A, 4.B), knowledge questions, contextual label adequacy. Tier 3, persistent failures: semantic alt text equivalence (7.A), background image judgment (7.C), form confirmation state (5.H), carousel timing (2.D). A spectrum line runs beneath all three tiers labeled: deterministic and observable, complex but learnable, contextual and interpretive.
+     Caption: The LLM's value concentrates where rules fail. The persistent failures are tests that require perceiving something the tool cannot access. -->
+
+The false positive rate on the blind run was 5 out of 70, or 7.1%. Brajnik et al. (2011) reported that expert human evaluators, applying the same structured method, produced false positive rates starting around 20%, with nonexpert runs reaching 49%. The tool's false positive rate is lower than expert human performance on the same metric. The evaluation contexts differ and the comparison has limits. But the tool is not generating plausible-sounding wrong answers at a problematic rate.
+
+The variable that mattered most throughout the build was prompt precision. Not the evidence pipeline, not the interactive layer, not the scoring logic. How the system prompt framed the task. This matches what Zhong et al. (2025) found in ScreenAudit: general principles plus contextual framing outperformed every other configuration. The model has knowledge that explicit guidelines cannot fully capture. Prompts that engage that knowledge work better than ones that try to enumerate it.
+
+At $0.0035 per test condition, a full 70-question benchmark costs approximately $0.25. Cost is not the constraint (HCI Design Lab, 2026).
+
+---
+
+## What this motivates
+
+The TT Auditor was built to answer a specific question. The answer is yes, with a failure profile that is informative rather than random.
+
+The more interesting question came out of building it.
+
+The bottleneck in accessibility auditing is not detecting obvious violations. Rule-based tools have handled those for years. The bottleneck is expert review time spent on contextual, qualitative calls — the ones that require someone who understands what accessibility means for real users in real situations. A tool that reliably pre-classifies the deterministic portion of a TT audit frees the human evaluator to spend their time where the method actually requires it: on the tests that evidence alone cannot resolve.
+
+The TT Auditor's 81.4% score means it can handle roughly four-fifths of a structured audit and return a clear list of the remainder for human review. A Trusted Tester who starts a review with 57 of 70 questions pre-classified, with the evidence attached, is in a different position than one starting from scratch. That is a real gain, and the limit on it should be stated plainly: the remaining fifth is where human expertise is not optional.
+
+Lab Notes 001 made an argument about trust as a resource: that AI systems borrow trust from users and that appropriate reliance requires calibration between how much a person trusts the system and what the system actually delivers. A tool that presents 81% accuracy with the same confidence as 100% is borrowing more than it has earned. The right design goal is a system where the confidence profile matches the performance profile. The evaluator should know exactly which outputs to rely on and which to check.
+
+That is the design problem this research points toward. Not how to automate the Trusted Tester method, but how to build something that makes a Trusted Tester faster on the parts where speed is possible, without eroding their vigilance on the parts where it is not.
+
+A later lab note will examine how that design performs in practice.
+
+---
+
+## The honest conclusion
+
+The TT method assumes a trained human evaluator. When you replace that evaluator with an AI, most of the procedure works. The parts that do not work are not random. They are the test conditions with qualitative verdict criteria: adequacy, equivalence, whether something is the only means of conveying something. Those require a perceiver.
+
+Identifying those conditions precisely is not a failure of the experiment. It is the result.
+
+81.4% blind accuracy is not a passing grade on the TT exam. It sits above the detection ceiling of any rule-based tool, in a range where trained human evaluators applying the same method still produce 20-32% false negatives. The honest comparison is not to a perfect standard but to what trained humans and automated tools actually produce.
+
+The TT Auditor's failure map is a map of where the work actually is. Every test condition it could not resolve cleanly is one that requires human expertise. A tool that knows where it stops being reliable is more useful than one that projects confidence it has not earned.
+
+---
+
+## References
+
+Brajnik, G., Yesilada, Y., & Harper, S. (2011). The expertise effect on web accessibility evaluation methods. *Human-Computer Interaction, 26*(3), 246-283. https://doi.org/10.1080/07370024.2011.601670
+
+Dreyfus, H. L., & Dreyfus, S. E. (1986). *Mind over machine: The power of human intuition and expertise in the era of the computer.* Free Press.
+
+HCI Design Lab. (2026). *TT Auditor: Technical log* [Internal research document].
+
+Lee, J. D., & See, K. A. (2004). Trust in automation: Designing for appropriate reliance. *Human Factors, 46*(1), 50-80. https://doi.org/10.1518/hfes.46.1.50.30392
+
+Mayer, R. C., Davis, J. H., & Schoorman, F. D. (1995). An integrative model of organizational trust. *Academy of Management Review, 20*(3), 709-734. https://doi.org/10.2307/258792
+
+Parasuraman, R., & Riley, V. (1997). Humans and automation: Use, misuse, disuse, abuse. *Human Factors, 39*(2), 230-253. https://doi.org/10.1518/001872097778543886
+
+Polanyi, M. (1966). *The tacit dimension.* University of Chicago Press. https://press.uchicago.edu/ucp/books/book/chicago/T/bo6035368.html
+
+Sweller, J. (1988). Cognitive load during problem solving: Effects on learning. *Cognitive Science, 12*(2), 257-285. https://doi.org/10.1016/0364-0213(88)90023-7
+
+U.S. Department of Homeland Security. (2022). *Trusted tester process for web, version 5.1.3.* https://www.dhs.gov/trusted-tester
+
+Vigo, M., & Brajnik, G. (2011). Automatic web accessibility metrics: Where we are and where we can go. *Interacting with Computers, 23*(2), 137-155. https://doi.org/10.1016/j.intcom.2011.01.001
+
+Vigo, M., Brown, J., & Conway, V. (2013). Benchmarking web accessibility evaluation tools: Measuring the harm of sole reliance on automated tests. *Proceedings of the 10th International Cross-Disciplinary Conference on Web Accessibility (W4A '13),* 1-10. https://doi.org/10.1145/2461121.2461124
+
+Zhong, M., Chen, R., Chen, X., Fogarty, J., & Wobbrock, J. O. (2025). ScreenAudit: Detecting screen reader accessibility errors in mobile apps using large language models. *Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems,* 1-19. https://doi.org/10.1145/3706598.3713797
