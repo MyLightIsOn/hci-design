@@ -37,7 +37,7 @@ export default function HomePage() {
           <div className={styles.services}>
             {[
               { num: "01", title: "Fast AI Prototyping", body: "Rapidly turn concepts into working prototypes. Test ideas with real users before investing in full-scale development." },
-              { num: "02", title: "Human-Centered AI Design", body: "Interfaces that prioritize usability, trust, and inclusivity — AI tools that feel intuitive and supportive of real people's needs." },
+              { num: "02", title: "Human-Centered AI Design", body: "Interfaces that prioritize usability, trust, and inclusivity. AI tools that feel intuitive and supportive of real people's needs." },
               { num: "03", title: "Custom AI Solutions", body: "Tailored AI-driven tools, dashboards, and workflows that integrate seamlessly into your existing systems." },
               { num: "04", title: "AI Training + Enablement", body: "Workshops and hands-on guidance that demystify AI and empower your organization to lead confidently." },
             ].map((s) => (
@@ -58,7 +58,7 @@ export default function HomePage() {
             <div className={styles.aboutLabel}>What is<br />HCI?</div>
             <p className={styles.aboutBody}>
               Human-Computer Interaction is the study of how people engage with technology. At HCI Design Lab,
-              we extend this to Human-AI experiences — designing systems where artificial intelligence supports,
+              we extend this to Human-AI experiences, designing systems where artificial intelligence supports,
               augments, and adapts to human needs, creating interactions that are intuitive, inclusive, and
               genuinely empowering.
             </p>
