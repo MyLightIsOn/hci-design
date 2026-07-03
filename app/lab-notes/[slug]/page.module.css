@@ -130,7 +130,7 @@
   border-radius: 4px;
 }
 .body :global(figcaption) {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--ink-ghost);
   line-height: 1.5;
   margin-top: 10px;
