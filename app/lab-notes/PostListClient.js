@@ -30,7 +30,8 @@ export default function PostListClient({ posts }) {
 
   return (
     <>
-      <FilterBar filters={ALL_FILTERS} onFilter={setFilter} />
+      {/* Re-enable once there are 10+ articles */}
+      {/* <FilterBar filters={ALL_FILTERS} onFilter={setFilter} /> */}
       <div className={styles.list}>
         {visible.map((post, i) => (
           <Link
