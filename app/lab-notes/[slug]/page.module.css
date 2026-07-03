@@ -138,6 +138,49 @@
   letter-spacing: 0.01em;
   text-align: center;
 }
+.body :global(ol),
+.body :global(ul) {
+  margin: 0 0 18px;
+  padding: 0;
+  list-style: none;
+  counter-reset: lab-note-list;
+}
+.body :global(ol li),
+.body :global(ul li) {
+  position: relative;
+  font-size: 18px;
+  color: var(--ink-muted);
+  line-height: 1.7;
+  padding: 6px 0 6px 40px;
+  border-top: 0.5px solid var(--border);
+}
+.body :global(ol li:last-child),
+.body :global(ul li:last-child) {
+  border-bottom: 0.5px solid var(--border);
+}
+.body :global(ol li) {
+  counter-increment: lab-note-list;
+}
+.body :global(ol li::before) {
+  content: counter(lab-note-list);
+  position: absolute;
+  left: 0;
+  top: 6px;
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.body :global(ul li::before) {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 16px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
 .body :global(strong) {
   font-family: var(--font-serif);
   font-size: 22px;
