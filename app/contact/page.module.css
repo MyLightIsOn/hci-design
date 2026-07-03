@@ -48,3 +48,12 @@
   padding-bottom: 3px;
 }
 .email:hover { color: var(--accent); }
+
+@media (max-width: 640px) {
+  .header { padding: 40px 20px 32px; }
+  .title { font-size: 34px; }
+
+  .section { padding: 40px 20px; }
+  .body { max-width: 100%; }
+  .email { font-size: 22px; word-break: break-word; }
+}

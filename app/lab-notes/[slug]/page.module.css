@@ -234,3 +234,21 @@
 .backLink { font-size: 12px; color: var(--ink-ghost); }
 .backLink:hover { color: var(--accent); }
 .footerCopy { font-size: 12px; color: var(--ink-ghost); }
+
+@media (max-width: 640px) {
+  .header { padding: 40px 20px 32px; }
+  .title { font-size: 30px; }
+
+  .body { padding: 0 20px; }
+  .body :global(h2) { font-size: 22px; }
+  .body :global(p),
+  .body :global(ol li),
+  .body :global(ul li) { font-size: 17px; }
+  .body :global(figure.figure--75) { width: 100%; }
+
+  .footerNav { grid-template-columns: 1fr; }
+  .navItem { padding: 22px 20px; }
+  .navItemRight { text-align: left; }
+
+  .backFooter { padding: 20px; flex-wrap: wrap; gap: 8px; }
+}

@@ -208,3 +208,18 @@
   transition: color 0.15s;
 }
 .card:hover .cardLink { color: var(--accent); }
+
+@media (max-width: 640px) {
+  .header { padding: 40px 20px 32px; grid-template-columns: 1fr; gap: 16px; align-items: start; }
+  .title { font-size: 34px; }
+
+  .heroWrap { padding: 24px 20px 0; }
+  .hero { height: 420px; }
+  .heroContent { padding: 20px; }
+  .heroCta { top: 16px; right: 16px; }
+  .heroTitle { font-size: 24px; }
+  .heroDesc { max-width: 100%; }
+  .heroMeta { flex-wrap: wrap; row-gap: 8px; }
+
+  .grid { grid-template-columns: 1fr; padding: 20px 20px 32px; }
+}

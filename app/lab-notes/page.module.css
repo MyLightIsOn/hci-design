@@ -126,3 +126,23 @@
   transition: color 0.15s;
 }
 .readLink:hover { color: var(--accent); }
+
+@media (max-width: 640px) {
+  .header { padding: 40px 20px 32px; grid-template-columns: 1fr; gap: 16px; align-items: start; }
+  .title { font-size: 34px; }
+
+  .list { padding: 0 20px; }
+
+  .post {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 22px 0;
+  }
+  .featured { padding-left: 16px; margin-left: -16px; padding-right: 16px; margin-right: -16px; }
+
+  .postMeta { display: flex; align-items: center; gap: 10px; padding-top: 0; }
+  .postIssue { margin-bottom: 0; }
+
+  .postRight { text-align: left; padding-top: 0; display: flex; align-items: center; gap: 12px; }
+  .readTime { margin-bottom: 0; }
+}
