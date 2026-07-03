@@ -54,6 +54,8 @@
   border-left: 2px solid var(--accent);
   padding-left: 28px;
   margin-left: -28px;
+  padding-right: 28px;
+  margin-right: -28px;
 }
 .featuredBadge {
   font-size: 10px;
