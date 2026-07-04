@@ -14,7 +14,13 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) return {};
-  return { title: `${post.frontmatter.title} — HCI Design Lab` };
+  const { title, lede } = post.frontmatter;
+  return {
+    title,
+    description: lede,
+    openGraph: { title, description: lede, type: "article" },
+    twitter: { title, description: lede },
+  };
 }
 
 export default async function PostPage({ params }) {

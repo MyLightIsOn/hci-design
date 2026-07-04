@@ -4,6 +4,17 @@ import ProjectsClient from "./ProjectsClient";
 import { projects } from "@/lib/projects";
 import styles from "./page.module.css";
 
+const title = "Projects";
+const description =
+  "A selection of AI, accessibility, and human-centered design projects — built, studied, and shipped.";
+
+export const metadata = {
+  title,
+  description,
+  openGraph: { title, description },
+  twitter: { title, description },
+};
+
 export default function WorkPage() {
   const featured = projects.find((p) => p.featured);
   const rest = projects.filter((p) => !p.featured);

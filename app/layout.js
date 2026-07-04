@@ -5,7 +5,10 @@ const description = "Human AI Creative Studio";
 
 export const metadata = {
   metadataBase: new URL("https://hcidesignlab.com"),
-  title,
+  title: {
+    default: title,
+    template: `%s — ${title}`,
+  },
   description,
   icons: {
     icon: [
@@ -25,8 +28,8 @@ export const metadata = {
     images: [
       {
         url: "/open-graph-image.png",
-        width: 2400,
-        height: 1260,
+        width: 1200,
+        height: 630,
       },
     ],
   },

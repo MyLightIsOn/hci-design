@@ -6,6 +6,15 @@ import { getAllPosts } from "@/lib/posts";
 import { projects } from "@/lib/projects";
 import styles from "./page.module.css";
 
+const description =
+  "We design systems where artificial intelligence supports, augments, and adapts to human needs — creating intuitive, inclusive, and empowering interactions.";
+
+export const metadata = {
+  description,
+  openGraph: { description },
+  twitter: { description },
+};
+
 export default function HomePage() {
   const posts = getAllPosts().slice(0, 3);
 
