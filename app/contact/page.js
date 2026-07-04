@@ -1,17 +1,13 @@
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import styles from "./page.module.css";
+import { pageMetadata } from "@/lib/seo";
 
-const title = "Contact";
-const description =
-  "Have a project idea, a question, or want to learn more about our services? Send us a message — we read every note and get back to you as soon as we can.";
-
-export const metadata = {
-  title,
-  description,
-  openGraph: { title, description },
-  twitter: { title, description },
-};
+export const metadata = pageMetadata({
+  title: "Contact",
+  description:
+    "Have a project idea, a question, or want to learn more about our services? Send us a message — we read every note and get back to you as soon as we can.",
+});
 
 export default function ContactPage() {
   return (

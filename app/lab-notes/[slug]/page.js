@@ -3,6 +3,7 @@ import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Nav from "@/components/Nav";
 import { getPostBySlug, getAllPosts, getAdjacentPosts } from "@/lib/posts";
+import { pageMetadata } from "@/lib/seo";
 import styles from "./page.module.css";
 
 export async function generateStaticParams() {
@@ -15,12 +16,7 @@ export async function generateMetadata({ params }) {
   const post = getPostBySlug(slug);
   if (!post) return {};
   const { title, lede } = post.frontmatter;
-  return {
-    title,
-    description: lede,
-    openGraph: { title, description: lede, type: "article" },
-    twitter: { title, description: lede },
-  };
+  return pageMetadata({ title, description: lede, type: "article" });
 }
 
 export default async function PostPage({ params }) {

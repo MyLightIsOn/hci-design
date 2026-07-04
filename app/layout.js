@@ -1,13 +1,13 @@
 import "./globals.css";
+import { siteName, ogImages } from "@/lib/seo";
 
-const title = "HCI Design Lab";
 const description = "Human AI Creative Studio";
 
 export const metadata = {
-  metadataBase: new URL("https://hcidesignlab.com"),
+  metadataBase: new URL("https://www.hcidesignlab.com"),
   title: {
-    default: title,
-    template: `%s — ${title}`,
+    default: siteName,
+    template: `%s — ${siteName}`,
   },
   description,
   icons: {
@@ -20,24 +20,18 @@ export const metadata = {
   },
   manifest: "/favicon/site.webmanifest",
   openGraph: {
-    title,
+    title: siteName,
     description,
-    siteName: title,
+    siteName,
     url: "/",
     type: "website",
-    images: [
-      {
-        url: "/open-graph-image.png",
-        width: 1200,
-        height: 630,
-      },
-    ],
+    images: ogImages,
   },
   twitter: {
     card: "summary_large_image",
-    title,
+    title: siteName,
     description,
-    images: ["/open-graph-image.png"],
+    images: ogImages.map((img) => img.url),
   },
 };
 

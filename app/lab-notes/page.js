@@ -3,17 +3,13 @@ import Footer from "@/components/Footer";
 import PostListClient from "./PostListClient";
 import { getAllPosts } from "@/lib/posts";
 import styles from "./page.module.css";
+import { pageMetadata } from "@/lib/seo";
 
-const title = "Lab Notes";
-const description =
-  "Observations, opinions, and dispatches from the work. Essays on AI design, human-centered systems, and what we're learning by building.";
-
-export const metadata = {
-  title,
-  description,
-  openGraph: { title, description },
-  twitter: { title, description },
-};
+export const metadata = pageMetadata({
+  title: "Lab Notes",
+  description:
+    "Observations, opinions, and dispatches from the work. Essays on AI design, human-centered systems, and what we're learning by building.",
+});
 
 export default function LabNotesPage() {
   const posts = getAllPosts();

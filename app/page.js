@@ -5,14 +5,26 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { getAllPosts } from "@/lib/posts";
 import { projects } from "@/lib/projects";
 import styles from "./page.module.css";
+import { siteName, ogImages } from "@/lib/seo";
 
 const description =
   "We design systems where artificial intelligence supports, augments, and adapts to human needs — creating intuitive, inclusive, and empowering interactions.";
 
 export const metadata = {
   description,
-  openGraph: { description },
-  twitter: { description },
+  openGraph: {
+    title: siteName,
+    description,
+    siteName,
+    type: "website",
+    images: ogImages,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteName,
+    description,
+    images: ogImages.map((img) => img.url),
+  },
 };
 
 export default function HomePage() {
