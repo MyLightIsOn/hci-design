@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Nav from "@/components/Nav";
+import MDXImage from "@/components/MDXImage";
 import { getPostBySlug, getAllPosts, getAdjacentPosts } from "@/lib/posts";
 import { pageMetadata } from "@/lib/seo";
 import styles from "./page.module.css";
@@ -65,7 +66,7 @@ export default async function PostPage({ params }) {
 
       <div className={styles.body}>
         <p className={styles.lede}>{fm.lede}</p>
-        <MDXRemote source={content} />
+        <MDXRemote source={content} components={{ MDXImage }} />
       </div>
 
       <div className={styles.footerNav}>

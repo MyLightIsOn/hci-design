@@ -73,7 +73,7 @@ Adding a Playwright-driven interactive layer solved the focus visibility tests t
 The score moved from 41% at baseline to 52% with authentication and axe-core, 59% after the prompt edit, 72% after the frameset fix, and 77-81.4% on the blind interactive runs (HCI Design Lab, 2026).
 
 <figure>
-  <img src="/lab-notes-images/002/1.png" alt="Step chart showing TT Auditor score progression across five milestone changes: 41% baseline, 52% after authentication and axe-core integration, 59% after prompt revision, 72% after frameset fix, 77-81.4% on blind interactive runs. The prompt revision step is highlighted." />
+  <MDXImage src="/lab-notes-images/002/1.png" alt="Step chart showing TT Auditor score progression across five milestone changes: 41% baseline, 52% after authentication and axe-core integration, 59% after prompt revision, 72% after frameset fix, 77-81.4% on blind interactive runs. The prompt revision step is highlighted." />
   <figcaption>Score progression across five milestone changes. The prompt edit gained more than all code changes before it combined. Note: gains shown in percentage points.</figcaption>
 </figure>
 
@@ -104,7 +104,7 @@ Sweller (1988) offers an explanation for why the judgment failures cluster where
 Zhong et al. (2025) found the same pattern across error types in ScreenAudit. Detection of missing labels, a surface-level check, was above 90% across all configurations, while detection of structural and contextual errors ranged from 40% to 83%. The hard cases concentrated where they always have, on establishing what something means in context rather than detecting whether it is present. That is the same limit the pre-AI tools ran into.
 
 <figure className="figure--75">
-  <img src="/lab-notes-images/002/2.png" alt="Two-column layout separating evidence failures from judgment failures. Left column lists tests 2.A, 2.D, 5.H, and 4.D as evidence failures with the common pattern: correct question, inaccessible page state. Right column lists tests 7.A, 7.C, 13.A, 9.C, and 12.B as judgment failures with the common pattern: accessible evidence, incorrect interpretation. A footer notes: evidence failures are engineering problems; judgment failures are expertise problems." />
+  <MDXImage src="/lab-notes-images/002/2.png" alt="Two-column layout separating evidence failures from judgment failures. Left column lists tests 2.A, 2.D, 5.H, and 4.D as evidence failures with the common pattern: correct question, inaccessible page state. Right column lists tests 7.A, 7.C, 13.A, 9.C, and 12.B as judgment failures with the common pattern: accessible evidence, incorrect interpretation. A footer notes: evidence failures are engineering problems; judgment failures are expertise problems." />
   <figcaption>Two kinds of failure, two different causes. Evidence failures have engineering solutions. Judgment failures are where the procedure runs out before reaching a determinate answer.</figcaption>
 </figure>
 
@@ -117,7 +117,7 @@ ScreenAudit achieved 69.2% coverage compared to 31.3% for the best conventional 
 The gains were not spread evenly. The reasoner's value concentrated on the test types rule-based tools miss, multi-page consistency (9.B, 9.C), keyboard access logic (4.A, 4.B), and the knowledge questions where TT5 tests understanding of the standard rather than page content. Structural rule checks, like whether a frame has a title or color contrast meets a numeric threshold, axe-core handled reliably, and the LLM added little. Where the answer is deterministic, rules are sufficient. Where it requires judgment, they are not.
 
 <figure>
-  <img src="/lab-notes-images/002/3.png" alt="Three-tier horizontal diagram showing a spectrum from left to right. Tier 1, rules sufficient: frame titles, duplicate IDs, color contrast ratios, ARIA role presence. Tier 2, LLM adds meaningful value: multi-page consistency (9.B, 9.C), keyboard access logic (4.A, 4.B), knowledge questions, contextual label adequacy. Tier 3, persistent failures: semantic alt text equivalence (7.A), background image judgment (7.C), form confirmation state (5.H), carousel timing (2.D). A spectrum line runs beneath all three tiers labeled: deterministic and observable, complex but learnable, contextual and interpretive." />
+  <MDXImage src="/lab-notes-images/002/3.png" alt="Three-tier horizontal diagram showing a spectrum from left to right. Tier 1, rules sufficient: frame titles, duplicate IDs, color contrast ratios, ARIA role presence. Tier 2, LLM adds meaningful value: multi-page consistency (9.B, 9.C), keyboard access logic (4.A, 4.B), knowledge questions, contextual label adequacy. Tier 3, persistent failures: semantic alt text equivalence (7.A), background image judgment (7.C), form confirmation state (5.H), carousel timing (2.D). A spectrum line runs beneath all three tiers labeled: deterministic and observable, complex but learnable, contextual and interpretive." />
   <figcaption>The LLM's value concentrates where rules fail. The persistent failures are tests that require perceiving something the tool cannot access.</figcaption>
 </figure>
 
