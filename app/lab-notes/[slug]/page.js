@@ -4,7 +4,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import Nav from "@/components/Nav";
 import MDXImage from "@/components/MDXImage";
 import { getPostBySlug, getAllPosts, getAdjacentPosts } from "@/lib/posts";
-import { pageMetadata } from "@/lib/seo";
+import { pageMetadata, articleJsonLd } from "@/lib/seo";
 import styles from "./page.module.css";
 
 export async function generateStaticParams() {
@@ -38,8 +38,20 @@ export default async function PostPage({ params }) {
     year: "numeric",
   });
 
+  const jsonLd = articleJsonLd({
+    title: fm.title,
+    description: fm.lede,
+    path: `/lab-notes/${slug}`,
+    datePublished: fm.date,
+    tags: fm.tags,
+  });
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Nav active="lab-notes" />
 
       <div className={styles.page}>

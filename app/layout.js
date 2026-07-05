@@ -1,5 +1,5 @@
 import "./globals.css";
-import { siteName, ogImages } from "@/lib/seo";
+import { siteName, ogImages, organizationJsonLd } from "@/lib/seo";
 
 const description = "Human AI Creative Studio";
 
@@ -41,7 +41,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
