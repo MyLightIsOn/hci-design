@@ -7,6 +7,7 @@ export const metadata = pageMetadata({
   title: "Contact",
   description:
     "Have a project idea, a question, or want to learn more about our services? Send us a message — we read every note and get back to you as soon as we can.",
+  path: "/contact",
 });
 
 export default function ContactPage() {

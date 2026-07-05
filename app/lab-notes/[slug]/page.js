@@ -16,7 +16,12 @@ export async function generateMetadata({ params }) {
   const post = getPostBySlug(slug);
   if (!post) return {};
   const { title, lede } = post.frontmatter;
-  return pageMetadata({ title, description: lede, type: "article" });
+  return pageMetadata({
+    title,
+    description: lede,
+    type: "article",
+    path: `/lab-notes/${slug}`,
+  });
 }
 
 export default async function PostPage({ params }) {

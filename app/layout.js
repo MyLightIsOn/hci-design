@@ -10,6 +10,9 @@ export const metadata = {
     template: `%s — ${siteName}`,
   },
   description,
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: [
       { url: "/favicon/favicon.ico", sizes: "any" },

@@ -9,6 +9,7 @@ export const metadata = pageMetadata({
   title: "Projects",
   description:
     "A selection of AI, accessibility, and human-centered design projects — built, studied, and shipped.",
+  path: "/work",
 });
 
 export default function WorkPage() {

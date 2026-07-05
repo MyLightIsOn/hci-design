@@ -9,6 +9,7 @@ export const metadata = pageMetadata({
   title: "Lab Notes",
   description:
     "Observations, opinions, and dispatches from the work. Essays on AI design, human-centered systems, and what we're learning by building.",
+  path: "/lab-notes",
 });
 
 export default function LabNotesPage() {
