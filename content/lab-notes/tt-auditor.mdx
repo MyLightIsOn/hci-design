@@ -30,6 +30,12 @@ Consider test 7.A. The procedure says to check whether a meaningful image has a 
 
 Test 7.C asks whether a background image is "the only means of conveying information." Test 13.A asks whether color is used as the *only* differentiator. Test 5.H requires observing what happens after a form is submitted. Every qualitative verdict criterion in TT5 leans on a human who already understands accessibility well enough to apply the standard correctly.
 
+<figure>
+	<MDXImage src="/lab-notes-images/002/1.png" alt="Three-tier stacked diagram. Top tier, Expertise, covering context, judgment, experience, and pattern recognition, labeled hard to automate, transfers only partially. Middle tier, Procedure, covering test IDs, decision trees, and pass/fail rules, which interprets the tier below it. Bottom tier, Evidence, covering DOM, browser, and interaction, which the procedure tier evaluates. A bracket beside procedure and evidence notes that automation transfers almost completely, since rules, procedure, and evidence can be encoded and executed." />
+	<figcaption>Expertise interprets procedure, and procedure evaluates evidence. Automation reaches the bottom two tiers; expertise is the layer that resists it.</figcaption>
+</figure>
+
+
 Michael Polanyi (1966) described this gap as the difference between explicit knowledge and tacit knowledge. Procedures can be written down, but the knowledge that makes them work cannot, at least not fully. The TT5 method documents what evaluators should do. It cannot document what they should know. That gap shows up even among humans. Brajnik, Yesilada, and Harper (2011) found that when evaluators applied the same structured method, experts found 71% of true accessibility barriers on average while nonexperts found 50%. Expertise closed the gap, not the method itself.
 
 Dreyfus and Dreyfus (1986) described this as the difference between rule-following and pattern recognition. A novice works through a procedure step by step. An expert recognizes the problem state and moves forward without consciously running the decision tree. A certified Trusted Tester who has run hundreds of audits does not apply test 7.A by asking "is there alt text, and is it equivalent?" They look at the image and the alt text, and they just know.
@@ -73,8 +79,8 @@ Adding a Playwright-driven interactive layer solved the focus visibility tests t
 The score moved from 41% at baseline to 52% with authentication and axe-core, 59% after the prompt edit, 72% after the frameset fix, and 77-81.4% on the blind interactive runs (HCI Design Lab, 2026).
 
 <figure>
-  <MDXImage src="/lab-notes-images/002/1.png" alt="Step chart showing TT Auditor score progression across five milestone changes: 41% baseline, 52% after authentication and axe-core integration, 59% after prompt revision, 72% after frameset fix, 77-81.4% on blind interactive runs. The prompt revision step is highlighted." />
-  <figcaption>Score progression across five milestone changes. The prompt edit gained more than all code changes before it combined. Note: gains shown in percentage points.</figcaption>
+	<MDXImage src="/lab-notes-images/002/2.png" alt="Step chart showing TT Auditor score progression across five milestone changes: 41% baseline, 52% after authentication and axe-core integration, 59% after prompt revision, 72% after frameset fix, 77-81.4% on blind interactive runs. The prompt revision step is highlighted." />
+	<figcaption>Score progression across five milestone changes. The prompt edit gained more than all code changes before it combined. Note: gains shown in percentage points.</figcaption>
 </figure>
 
 The 95% agent score on the directed exam belongs in a different column. In that setup, each question names the test condition in advance. The tool knew it was evaluating test 4.D before opening the page. Real auditing does not work that way. The directed exam score measures how well the tool reasons when it knows exactly what it is looking for. The blind score measures whether it can determine what to look for and then reason about it. Those are different capabilities, and the 14-point gap between them is a meaningful finding.
@@ -104,8 +110,8 @@ Sweller (1988) offers an explanation for why the judgment failures cluster where
 Zhong et al. (2025) found the same pattern across error types in ScreenAudit. Detection of missing labels, a surface-level check, was above 90% across all configurations, while detection of structural and contextual errors ranged from 40% to 83%. The hard cases concentrated where they always have, on establishing what something means in context rather than detecting whether it is present. That is the same limit the pre-AI tools ran into.
 
 <figure className="figure--75">
-  <MDXImage src="/lab-notes-images/002/2.png" alt="Two-column layout separating evidence failures from judgment failures. Left column lists tests 2.A, 2.D, 5.H, and 4.D as evidence failures with the common pattern: correct question, inaccessible page state. Right column lists tests 7.A, 7.C, 13.A, 9.C, and 12.B as judgment failures with the common pattern: accessible evidence, incorrect interpretation. A footer notes: evidence failures are engineering problems; judgment failures are expertise problems." />
-  <figcaption>Two kinds of failure, two different causes. Evidence failures have engineering solutions. Judgment failures are where the procedure runs out before reaching a determinate answer.</figcaption>
+	<MDXImage src="/lab-notes-images/002/3.png" alt="Two-column layout separating evidence failures from judgment failures. Left column lists tests 2.A, 2.D, 5.H, and 4.D as evidence failures with the common pattern: correct question, inaccessible page state. Right column lists tests 7.A, 7.C, 13.A, 9.C, and 12.B as judgment failures with the common pattern: accessible evidence, incorrect interpretation. A footer notes: evidence failures are engineering problems; judgment failures are expertise problems." />
+	<figcaption>Two kinds of failure, two different causes. Evidence failures have engineering solutions. Judgment failures are where the procedure runs out before reaching a determinate answer.</figcaption>
 </figure>
 
 ---
@@ -117,8 +123,8 @@ ScreenAudit achieved 69.2% coverage compared to 31.3% for the best conventional 
 The gains were not spread evenly. The reasoner's value concentrated on the test types rule-based tools miss, multi-page consistency (9.B, 9.C), keyboard access logic (4.A, 4.B), and the knowledge questions where TT5 tests understanding of the standard rather than page content. Structural rule checks, like whether a frame has a title or color contrast meets a numeric threshold, axe-core handled reliably, and the LLM added little. Where the answer is deterministic, rules are sufficient. Where it requires judgment, they are not.
 
 <figure>
-  <MDXImage src="/lab-notes-images/002/3.png" alt="Three-tier horizontal diagram showing a spectrum from left to right. Tier 1, rules sufficient: frame titles, duplicate IDs, color contrast ratios, ARIA role presence. Tier 2, LLM adds meaningful value: multi-page consistency (9.B, 9.C), keyboard access logic (4.A, 4.B), knowledge questions, contextual label adequacy. Tier 3, persistent failures: semantic alt text equivalence (7.A), background image judgment (7.C), form confirmation state (5.H), carousel timing (2.D). A spectrum line runs beneath all three tiers labeled: deterministic and observable, complex but learnable, contextual and interpretive." />
-  <figcaption>The LLM's value concentrates where rules fail. The persistent failures are tests that require perceiving something the tool cannot access.</figcaption>
+	<MDXImage src="/lab-notes-images/002/4.png" alt="Three-tier horizontal diagram showing a spectrum from left to right. Tier 1, rules sufficient: frame titles, duplicate IDs, color contrast ratios, ARIA role presence. Tier 2, LLM adds meaningful value: multi-page consistency (9.B, 9.C), keyboard access logic (4.A, 4.B), knowledge questions, contextual label adequacy. Tier 3, persistent failures: semantic alt text equivalence (7.A), background image judgment (7.C), form confirmation state (5.H), carousel timing (2.D). A spectrum line runs beneath all three tiers labeled: deterministic and observable, complex but learnable, contextual and interpretive." />
+	<figcaption>The LLM's value concentrates where rules fail. The persistent failures are tests that require perceiving something the tool cannot access.</figcaption>
 </figure>
 
 The false positive rate on the blind run was 5 out of 70, or 7.1%. Brajnik et al. (2011) reported that expert human evaluators, applying the same structured method, produced false positive rates starting around 20%, with nonexpert runs reaching 49%. The tool's false positive rate is lower than expert human performance on the same metric. The evaluation contexts differ and the comparison has limits. But the tool is not generating plausible-sounding wrong answers at a problematic rate.
