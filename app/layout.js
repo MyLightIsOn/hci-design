@@ -1,7 +1,8 @@
 import "./globals.css";
 import { siteName, ogImages, organizationJsonLd } from "@/lib/seo";
 
-const description = "Human AI Creative Studio";
+const description =
+  "Lab notes on designing systems where artificial intelligence supports, augments, and adapts to human needs.";
 
 export const metadata = {
   metadataBase: new URL("https://www.hcidesignlab.com"),

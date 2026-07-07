@@ -8,7 +8,7 @@ import styles from "./page.module.css";
 import { siteName, ogImages } from "@/lib/seo";
 
 const description =
-  "We design systems where artificial intelligence supports, augments, and adapts to human needs — creating intuitive, inclusive, and empowering interactions.";
+  "Thoughts on designing systems where artificial intelligence supports, augments, and adapts to human needs — running experiments, testing prototypes, and sharing what we learn.";
 
 export const metadata = {
   description,
@@ -43,34 +43,13 @@ export default function HomePage() {
           Design<span className={styles.dot}>.</span>
         </h1>
         <p className={styles.heroSub}>
-          We design systems where artificial intelligence supports, augments, and adapts
-          to human needs. Creating intuitive, inclusive, and empowering interactions.
+          Thoughts on designing systems where artificial intelligence supports, augments,
+          and adapts to human needs. Running experiments, testing prototypes, and sharing what we learn.
         </p>
-        <Link href="/#services" className={styles.heroCta}>
-          View our services
+        <Link href="/lab-notes" className={styles.heroCta}>
+          Read the lab notes
         </Link>
       </section>
-
-      {/* Services */}
-      <ScrollReveal>
-        <section className={styles.section} id="services">
-          <p className={styles.sectionLabel}>What we do</p>
-          <div className={styles.services}>
-            {[
-              { num: "01", title: "Fast AI Prototyping", body: "Rapidly turn concepts into working prototypes. Test ideas with real users before investing in full-scale development." },
-              { num: "02", title: "Human-Centered AI Design", body: "Interfaces that prioritize usability, trust, and inclusivity. AI tools that feel intuitive and supportive of real people's needs." },
-              { num: "03", title: "Custom AI Solutions", body: "Tailored AI-driven tools, dashboards, and workflows that integrate seamlessly into your existing systems." },
-              { num: "04", title: "AI Training + Enablement", body: "Workshops and hands-on guidance that demystify AI and empower your organization to lead confidently." },
-            ].map((s) => (
-              <div key={s.num} className={styles.service}>
-                <p className={styles.serviceNum}>{s.num}</p>
-                <h3 className={styles.serviceTitle}>{s.title}</h3>
-                <p className={styles.serviceBody}>{s.body}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-      </ScrollReveal>
 
       {/* About */}
       <ScrollReveal>
