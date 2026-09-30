@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Riverbend Community Grant Portal</title>
+<style>
+  /* Intentionally uses its own look & feel, unrelated to the main site's theme. */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    background: #eef1f4;
+    color: #4a4a4a; /* BUG: low-contrast body text on light background (~4.4:1 at best, worse for smaller text) */
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  /* BUG: no skip link, and no visible focus styles anywhere on the page (focus outline suppressed below) */
+  *:focus { outline: none; }
+
+  header.topbar {
+    background: linear-gradient(90deg, #7b8fae, #a6b6cf);
+    padding: 18px 24px;
+  }
+  .topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .brand {
+    color: #dfe6f0; /* BUG: low contrast brand text against the gradient background */
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  /* BUG: nav built with styled <div>/<span> instead of real <nav>/<a>/<button>, so it is invisible to
+     screen reader "links/landmarks" lists and not reachable by Tab at all (click handlers only). */
+  .nav-row {
+    display: flex;
+    gap: 22px;
+    margin-top: 10px;
+  }
+  .nav-item {
+    color: #2f3b52;
+    font-size: 14px;
+    letter-spacing: .03em;
+    cursor: pointer;
+  }
+  .nav-item:hover { text-decoration: underline; }
+
+  .hero {
+    background: #c9d3e0 url('https://placehold.co/1200x300') center/cover no-repeat;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero h1 {
+    /* BUG: heading levels skip around the page — this h1 is fine, but sections below jump
+       from h1 straight to h4, then back to h2, breaking the heading outline a screen reader user relies on */
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,.4);
+    font-size: 30px;
+    margin: 0;
+  }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 30px 24px 60px; }
+
+  h4.section-label {
+    color: #5a6b8c;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin: 0 0 4px;
+  }
+  h2.section-title {
+    margin: 0 0 18px;
+    color: #2f3b52;
+    font-size: 24px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  }
+  .card img { width: 100%; border-radius: 6px; margin-bottom: 10px; }
+  .card h3 { margin: 0 0 8px; font-size: 17px; color: #2f3b52; }
+  .card p { margin: 0 0 12px; font-size: 14px; }
+
+  /* BUG: link styled to look identical to plain text (no underline, same color as body copy) —
+     "click here" / "read more" text gives no indication of destination either */
+  a.readmore {
+    color: #4a4a4a;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  .banner {
+    background: #fff3cd;
+    border-left: 6px solid #e0b400;
+    padding: 14px 18px;
+    margin-bottom: 40px;
+    font-size: 14px;
+  }
+
+  form.apply-form {
+    background: #fff;
+    border-radius: 10px;
+    padding: 26px 28px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.08);
+    max-width: 640px;
+  }
+  .field-row { margin-bottom: 18px; }
+
+  /* BUG: labels are styled divs that sit near the inputs but are never associated via for/id
+     or wrapping — a screen reader announces only "edit text", not the field's purpose. */
+  .field-label {
+    display: block;
+    font-size: 13px;
+    color: #6b6b6b;
+    margin-bottom: 4px;
+  }
+  .field-row input[type="text"],
+  .field-row input[type="email"],
+  .field-row select {
+    width: 100%;
+    padding: 9px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 14px;
+    /* BUG: input border/background contrast is fine, but there's no focus indicator (outline:none above)
+       and no visible "required" indication beyond color, see asterisk below */
+  }
+  /* BUG: required-field marker conveyed by color alone */
+  .required { color: #e04040; }
+
+  .checkbox-row { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; }
+  /* BUG: checkbox has no associated <label for>, just adjacent text in a span, plus the
+     clickable/tap target is only the tiny native checkbox itself, not the text. */
+
+  /* BUG: placeholder text used as the only instruction for the phone field (disappears on input,
+     insufficient contrast ~2.7:1) */
+  ::placeholder { color: #bcbcbc; }
+
+  button.submit-btn {
+    background: #5a6b8c;
+    color: #fff;
+    border: none;
+    padding: 11px 26px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  button.submit-btn:hover { background: #4a5a78; }
+
+  /* BUG: this custom "icon button" for removing an uploaded file is a <div> with a click handler,
+     not a real <button> — not focusable, not announced with a role, no accessible name (icon-only). */
+  .icon-x {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ddd;
+    color: #777;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  footer {
+    background: #2f3b52;
+    color: #7f8aa3; /* BUG: low-contrast footer text against dark background */
+    font-size: 12px;
+    padding: 22px 24px;
+    text-align: center;
+  }
+  footer a { color: #8f9ab3; }
+
+  /* BUG: zoom/reflow trap — fixed pixel widths and no wrapping on the grid mean the page
+     overflows and requires horizontal scrolling at 400% browser zoom / narrow viewports.
+     (no @media rules, no max-width:100% flexibility below ~1000px) */
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">Riverbend Community Grant Portal</div>
+    <div>
+      <!-- BUG: fake nav, not a real <nav>/<a> list; unreachable by keyboard, invisible to SR landmarks -->
+      <div class="nav-row">
+        <div class="nav-item" onclick="location.href='#grants'">Open Grants</div>
+        <div class="nav-item" onclick="location.href='#apply'">Apply</div>
+        <div class="nav-item" onclick="location.href='#faq'">FAQ</div>
+        <div class="nav-item" onclick="location.href='#contact'">Contact</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>Fall 2026 Neighborhood Grants Are Open</h1>
+</div>
+
+<main>
+
+  <!-- BUG: heading order skips from the page's h1 straight to h4 here, then to h2 below —
+       there is no h3 in between the way a properly nested outline would have one -->
+  <h4 class="section-label">Currently accepting</h4>
+  <h2 class="section-title" id="grants">Open Grant Categories</h2>
+
+  <div class="grid">
+    <div class="card">
+      <!-- BUG: placeholder image with no meaningful alt text; filename-style alt is useless to SR users -->
+      <img src="https://placehold.co/300x160" alt="image1.jpg">
+      <h3>Neighborhood Beautification</h3>
+      <p>Up to $2,500 for community garden, mural, and cleanup projects.</p>
+      <a href="#" class="readmore">Click here</a>
+    </div>
+    <div class="card">
+      <img src="https://placehold.co/300x160" alt="photo">
+      <h3>Youth Programs</h3>
+      <p>Up to $5,000 for after-school and summer enrichment programs.</p>
+      <a href="#" class="readmore">Read more</a>
+    </div>
+    <div class="card">
+      <!-- BUG: purely decorative-looking image still gets a verbose, unhelpful alt -->
+      <img src="https://placehold.co/300x160" alt="DSC00231">
+      <h3>Small Business Micro-Grants</h3>
+      <p>Up to $10,000 for storefront improvements on Main Street.</p>
+      <a href="#" class="readmore">Click here</a>
+    </div>
+  </div>
+
+  <div class="banner" role="alert">
+    <!-- BUG: color/icon-only warning — the only cue that this is urgent is the yellow background;
+         no text like "Warning:" and no non-color indicator -->
+    Applications close October 15. Late submissions will not be reviewed.
+  </div>
+
+  <h4 class="section-label">Ready to apply?</h4>
+  <h2 class="section-title" id="apply">Grant Application</h2>
+
+  <form class="apply-form">
+    <div class="field-row">
+      <span class="field-label">Full name <span class="required">*</span></span>
+      <input type="text" name="fullname" placeholder="Jane Rivera">
+    </div>
+
+    <div class="field-row">
+      <span class="field-label">Email <span class="required">*</span></span>
+      <input type="email" name="email" placeholder="jane@example.com">
+    </div>
+
+    <div class="field-row">
+      <!-- BUG: only instruction is inside the placeholder itself, no visible label at all -->
+      <input type="text" name="phone" placeholder="Phone number, format (555) 555-5555">
+    </div>
+
+    <div class="field-row">
+      <span class="field-label">Grant category</span>
+      <select name="category">
+        <option>Neighborhood Beautification</option>
+        <option>Youth Programs</option>
+        <option>Small Business Micro-Grants</option>
+      </select>
+    </div>
+
+    <div class="field-row">
+      <span class="field-label">Upload supporting document</span>
+      <input type="text" readonly value="budget-narrative.pdf" style="width:auto; margin-right:6px;">
+      <!-- BUG: icon-only "remove file" control with no accessible name, built from a div not a button -->
+      <span class="icon-x" onclick="alert('removed')">x</span>
+    </div>
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="agree">
+      <!-- BUG: text is a span, not a <label for="agree">, so clicking/tapping the text does nothing
+           and a screen reader won't read this as the checkbox's name -->
+      <span>I agree to the program terms and conditions</span>
+    </div>
+
+    <button type="submit" class="submit-btn">Submit Application</button>
+  </form>
+
+</main>
+
+<footer id="contact">
+  <p>Riverbend Community Grant Portal &middot; 400 Elm Street &middot; (555) 010-2200</p>
+  <p><a href="#">Privacy</a> &middot; <a href="#">Terms</a> &middot; <a href="#" id="faq">FAQ</a></p>
+</footer>
+
+</body>
+</html>
