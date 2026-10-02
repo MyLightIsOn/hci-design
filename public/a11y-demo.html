@@ -15,8 +15,18 @@
     line-height: 1.5;
   }
 
-  /* BUG: no skip link, and no visible focus styles anywhere on the page (focus outline suppressed below) */
+  /* BUG: no skip link, and the default focus outline is suppressed globally, so most links and form
+     fields show no visible focus when tabbed to. Only elements marked .focus-ok (below) restore it. */
   *:focus { outline: none; }
+
+  /* GOOD (for contrast with the above): a clear, high-contrast focus indicator on selected controls.
+     3px solid ring with an offset, ~9:1 against the white card/page backgrounds, never relies on color change alone. */
+  .focus-ok:focus-visible {
+    outline: 3px solid #1a3fa8;
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+  footer .focus-ok:focus-visible { outline-color: #ffd54a; } /* light ring for the dark footer */
 
   header.topbar {
     background: linear-gradient(90deg, #7b8fae, #a6b6cf);
@@ -234,7 +244,7 @@
       <img src="https://placehold.co/300x160" alt="photo">
       <h3>Youth Programs</h3>
       <p>Up to $5,000 for after-school and summer enrichment programs.</p>
-      <a href="#" class="readmore">Read more</a>
+      <a href="#" class="readmore focus-ok">Read more</a>
     </div>
     <div class="card">
       <!-- BUG: purely decorative-looking image still gets a verbose, unhelpful alt -->
@@ -257,12 +267,12 @@
   <form class="apply-form">
     <div class="field-row">
       <span class="field-label">Full name <span class="required">*</span></span>
-      <input type="text" name="fullname" placeholder="Jane Rivera">
+      <input type="text" name="fullname" class="focus-ok" placeholder="Jane Rivera">
     </div>
 
     <div class="field-row">
       <span class="field-label">Email <span class="required">*</span></span>
-      <input type="email" name="email" placeholder="jane@example.com">
+      <input type="email" name="email" class="focus-ok" placeholder="jane@example.com">
     </div>
 
     <div class="field-row">
@@ -293,14 +303,14 @@
       <span>I agree to the program terms and conditions</span>
     </div>
 
-    <button type="submit" class="submit-btn">Submit Application</button>
+    <button type="submit" class="submit-btn focus-ok">Submit Application</button>
   </form>
 
 </main>
 
 <footer id="contact">
   <p>Riverbend Community Grant Portal &middot; 400 Elm Street &middot; (555) 010-2200</p>
-  <p><a href="#">Privacy</a> &middot; <a href="#">Terms</a> &middot; <a href="#" id="faq">FAQ</a></p>
+  <p><a href="#" class="focus-ok">Privacy</a> &middot; <a href="#" class="focus-ok">Terms</a> &middot; <a href="#" id="faq">FAQ</a></p>
 </footer>
 
 </body>
